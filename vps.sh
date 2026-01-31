@@ -216,7 +216,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "Coloque" quanto de espaço deseja em sua maquina? " (default: 20G): ")" DISK_SIZE
+        read -p "$(print_status "Coloque" "quanto de espaço deseja em sua maquina? (default: 20G): ")" DISK_SIZE
         DISK_SIZE="${DISK_SIZE:-20G}"
         if validate_input "size" "$DISK_SIZE"; then
             break
@@ -224,7 +224,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "Coloque" quanto de memoria ram? " (default: 2048): ")" MEMORY
+        read -p "$(print_status "Coloque" "quanto de memoria ram? (default: 2048): ")" MEMORY
         MEMORY="${MEMORY:-2048}"
         if validate_input "number" "$MEMORY"; then
             break
