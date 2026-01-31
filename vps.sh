@@ -27,9 +27,11 @@ print_status() {
     case $type in
         "INFO") echo -e "\033[1;34m[INFO]\033[0m $message" ;;
         "WARN") echo -e "\033[1;33m[WARN]\033[0m $message" ;;
-        "ERROR") echo -e "\033[1;31m[ERROR]\033[0m $message" ;;
-        "SUCCESS") echo -e "\033[1;32m[SUCCESS]\033[0m $message" ;;
+        "Cuidado") echo -e "\033[1;33m[Cuidado]\033[0m $message" ;;
+        "ERROR") echo -e "\033[1;31m[ERRO]\033[0m $message" ;;
+        "SUCCESS") echo -e "\033[1;32m[SUCCESSO]\033[0m $message" ;;
         "INPUT") echo -e "\033[1;36m[INPUT]\033[0m $message" ;;
+        "Coloque") echo -e "\033[1;36m[Coloque]\033[0m $message" ;;
         *) echo "[$type] $message" ;;
     esac
 }
