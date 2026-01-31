@@ -44,7 +44,7 @@ validate_input() {
     case $type in
         "number")
             if ! [[ "$value" =~ ^[0-9]+$ ]]; then
-                print_status "ERROR" "coloque o numero certo"
+                print_status "ERRO" "coloque o numero certo"
                 return 1
             fi
             ;;
@@ -68,7 +68,7 @@ validate_input() {
             ;;
         "username")
             if ! [[ "$value" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
-                print_status "ERROR" "O usuario só pode conter apenas letras, números, hífens e sublinhados"
+                print_status "ERRO" "O usuario só pode conter apenas letras, números, hífens e sublinhados"
                 return 1
             fi
             ;;
