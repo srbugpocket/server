@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
+# ==========================================
+#   🚀 SAGAR GAMING 2X - FERRAMENTA COMPLETA
+# ==========================================
+
 set -u
 
-# --- ANSI COLORS ---
-C=$'\033[36m'  # Cyan
-G=$'\033[32m'  # Green
-R=$'\033[31m'  # Red
-B=$'\033[34m'  # Blue
-Y=$'\033[33m'  # Yellow
-W=$'\033[97m'  # White
-N=$'\033[0m'   # Reset
+# --- CORES ANSI ---
+C=$'\033[36m'  # Ciano
+G=$'\033[32m'  # Verde
+R=$'\033[31m'  # Vermelho
+B=$'\033[34m'  # Azul
+Y=$'\033[33m'  # Amarelo
+W=$'\033[97m'  # Branco
+N=$'\033[0m'   # Resetar
 
-# --- HEADER FUNCTION ---
-header() {
+# --- FUNÇÃO DE CABEÇALHO ---
+cabecalho() {
     clear
     echo -e "${B}  __  __       _         __  __                  ${N}"
     echo -e "${B} |  \/  | __ _(_)_ __   |  \/  | ___ _ __  _   _ ${N}"
@@ -19,36 +23,35 @@ header() {
     echo -e "${B} | |  | | (_| | | | | | | |  | |  __/ | | | |_| |${N}"
     echo -e "${B} |_|  |_|\__,_|_|_| |_| |_|  |_|\___|_| |_|\__,_|${N}"
     echo -e "${B}=====================================================${N}"
-    echo -e "${Y}       Increva-se no canal srbugpocket!${N}"
-    echo -e "${Y}           Creditos: sagar gaming x2${N}"
+    echo -e "${Y}      🚀 Inscreva-se no Sagar Gaming 2X      ${N}"
     echo -e "${B}=====================================================${N}"
     echo ""
 }
 
-# --- PAUSE FUNCTION ---
-pause() {
+# --- FUNÇÃO DE PAUSA ---
+pausa() {
     echo ""
     read -p "${W}Pressione [Enter] para voltar ao menu...${N}" dummy
 }
 
-# --- MAIN LOOP ---
+# --- LOOP PRINCIPAL ---
 while true; do
-    header
-    echo -e "${C} 1) ${W}instalar dependências ${G}(Node + Mineflayer)${N}"
-    echo -e "${C} 2) ${W}Criador de Bot dc ${G}(Create app.js)${N}"
-    echo -e "${C} 3) ${W}Reinicialização automatica ${G}(Systemd Service)${N}"
-    echo -e "${C} 4) ${W}Remover Bot ${G}(Manager)${N}"
-    echo -e "${C} 5) ${W}Servidor do Discord Link${N}"
-    echo -e "${C} 6) ${W}Canal do YouTube Link${N}"
-    echo -e "${C} 7) ${W}instalar VM ${G}(IDX VPS)${N}"
-    echo -e "${C} 8) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
+    cabecalho
+    echo -e "${C} 1) ${W}Instalador de Dependências ${G}(Node + Mineflayer)${N}"
+    echo -e "${C} 2) ${W}Criador de Bot ${G}(Criar app.js)${N}"
+    echo -e "${C} 3) ${W}Configurar Reinício Automático ${G}(Serviço Systemd)${N}"
+    echo -e "${C} 4) ${W}Remover Bot ${G}(Gerenciador)${N}"
+    echo -e "${C} 5) ${W}Link do Servidor Discord${N}"
+    echo -e "${C} 6) ${W}Link do Canal do YouTube${N}"
+    echo -e "${C} 7) ${W}Instalador de VM ${G}(IDX VPS)${N}"
+    echo -e "${C} 8) ${W}Instalador RDP ${G}(Ambiente de Desktop)${N}"
     echo -e "${C} 9) ${W}Instalador Tailscale ${G}(VPN)${N}"
     echo -e "${R} 10) Sair${N}"
     echo ""
     echo -e "${B}=====================================================${N}"
-    read -p "${Y}👉 selecione a opção [1-10]: ${N}" choice
+    read -p "${Y}👉 Selecione uma opção [1-10]: ${N}" escolha
 
-    case $choice in
+    case $escolha in
         1)
             echo ""
             echo -e "${Y}🔄 instalando dependências...${N}"
