@@ -87,7 +87,7 @@ check_dependencies() {
     
     if [ ${#missing_deps[@]} -ne 0 ]; then
         print_status "ERROR" "Missing dependencies: ${missing_deps[*]}"
-        print_status "INFO" "On Ubuntu/Debian, try: sudo apt install qemu-system cloud-image-utils wget"
+        print_status "INFO" "no Ubuntu/Debian, tente: sudo apt install qemu-system cloud-image-utils wget"
         exit 1
     fi
 }
@@ -144,7 +144,7 @@ SEED_FILE="$SEED_FILE"
 CREATED="$CREATED"
 EOF
     
-    print_status "SUCCESSO" "Configuration saved to $config_file"
+    print_status "SUCCESSO" "Configuração salvada em $config_file"
 }
 
 # Function to create new VM
@@ -174,7 +174,7 @@ create_new_vm() {
 
     # Custom Inputs with validation
     while true; do
-        read -p "$(print_status "INPUT" "Enter VM name (default: $DEFAULT_HOSTNAME): ")" VM_NAME
+        read -p "$(print_status "Coloque" "Coloque o nome da VM (default: $DEFAULT_HOSTNAME): ")" VM_NAME
         VM_NAME="${VM_NAME:-$DEFAULT_HOSTNAME}"
         if validate_input "name" "$VM_NAME"; then
             # Check if VM name already exists
@@ -287,7 +287,7 @@ setup_vm_image() {
     
     # Checkando se a imagem existi
     if [[ -f "$IMG_FILE" ]]; then
-        print_status "INFO" "Image file already exists. Skipping download."
+        print_status "INFO" "Arquvio da Imagem ja existe,Skippando..."
     else
         print_status "INFO" "Downloading image from $IMG_URL..."
         if ! wget --progress=bar:force "$IMG_URL" -O "$IMG_FILE.tmp"; then
@@ -337,7 +337,7 @@ EOF
         exit 1
     fi
     
-    print_status "SUCCESS" "VM '$VM_NAME' criado com sucesso successfully."
+    print_status "SUCCESSO" "VM '$VM_NAME' criado com sucesso successfully."
 }
 
 # Função para inicializar VM
@@ -429,24 +429,24 @@ show_vm_info() {
     
     if load_vm_config "$vm_name"; then
         echo
-        print_status "INFO" "VM Information: $vm_name"
-        echo "=========================================="
-        echo "OS: $OS_TYPE"
-        echo "Hostname: $HOSTNAME"
-        echo "Username: $USERNAME"
-        echo "Password: $PASSWORD"
-        echo "SSH Port: $SSH_PORT"
-        echo "Memory: $MEMORY MB"
-        echo "CPUs: $CPUS"
-        echo "Disk: $DISK_SIZE"
-        echo "GUI Mode: $GUI_MODE"
-        echo "Port Forwards: ${PORT_FORWARDS:-None}"
-        echo "Created: $CREATED"
-        echo "Image File: $IMG_FILE"
-        echo "Seed File: $SEED_FILE"
-        echo "=========================================="
-        echo
-        read -p "$(print_status "INPUT" "Press Enter to continue...")"
+        print_status "INFO" "Informações da VM: $vm_name"
+echo "=========================================="
+echo "SO: $OS_TYPE"
+echo "Nome do Host: $HOSTNAME"
+echo "Usuário: $USERNAME"
+echo "Senha: $PASSWORD"
+echo "Porta SSH: $SSH_PORT"
+echo "Memória: $MEMORY MB"
+echo "CPUs: $CPUS"
+echo "Disco: $DISK_SIZE"
+echo "Modo GUI: $GUI_MODE"
+echo "Redirecionamento de Portas: ${PORT_FORWARDS:-Nenhum}"
+echo "Criado em: $CREATED"
+echo "Arquivo da Imagem: $IMG_FILE"
+echo "Arquivo Seed: $SEED_FILE"
+echo "=========================================="
+echo
+read -p "$(print_status "INPUT" "Pressione Enter para continuar...")"
     fi
 }
 
@@ -488,17 +488,19 @@ edit_vm_config() {
         print_status "INFO" "Editing VM: $vm_name"
         
         while true; do
-            echo "What would you like to edit?"
-            echo "  1) Hostname"
-            echo "  2) Username"
-            echo "  3) Password"
-            echo "  4) SSH Port"
-            echo "  5) GUI Mode"
-            echo "  6) Port Forwards"
-            echo "  7) Memory (RAM)"
-            echo "  8) CPU Count"
-            echo "  9) Disk Size"
-            echo "  0) Back to main menu"
+            echo "O que você gostaria de editar?"
+echo "  1) Hostname"
+echo "  2) Usuário"
+echo "  3) Senha"
+echo "  4) Porta SSH"
+echo "  5) Modo GUI"
+echo "  6) Redirecionamento de Portas"
+echo "  7) Memória (RAM)"
+echo "  8) Quantidade de CPUs"
+echo "  9) Tamanho do Disco"
+echo "  0) Voltar ao menu principal"
+
+
             
             read -p "$(print_status "INPUT" "Enter your choice: ")" edit_choice
             
