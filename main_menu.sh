@@ -116,7 +116,7 @@ while true; do
             ;;
         *)
             echo ""
-            echo -e "${R}❌ Opção errada! por favor escreva certo 1-10.${N}"
+            echo -e "${R}❌ Opção errada! por favor coloque a opção correta! 1-10.${N}"
             sleep 2
             ;;
     esac
