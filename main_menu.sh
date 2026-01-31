@@ -23,7 +23,8 @@ header() {
     echo -e "${B} | |  | | (_| | | | | | | |  | |  __/ | | | |_| |${N}"
     echo -e "${B} |_|  |_|\__,_|_|_| |_| |_|  |_|\___|_| |_|\__,_|${N}"
     echo -e "${B}=====================================================${N}"
-    echo -e "${Y}        Increava-se no canal srbugpocket!${N}"
+    echo -e "${Y}        Increava-se no canal srbugpocket!${N}
+    echo -e "${Y}        Creditos:sagar gaming x2${N}
     echo -e "${B}=====================================================${N}"
     echo ""
 }
@@ -55,25 +56,25 @@ while true; do
         1)
             echo ""
             echo -e "${Y}🔄 instalando dependências...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/dependency.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/dependency.sh | sed 's/\r$//' | bash
             pause
             ;;
         2)
             echo ""
             echo -e "${Y}🛠️  iniciando criador de Bot Dc...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/bot_maker.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/bot_maker.sh | sed 's/\r$//' | bash
             pause
             ;;
         3)
             echo ""
             echo -e "${Y}⚙️  iniciando reinicialização automatica...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/autorestarter.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/autorestarter.sh | sed 's/\r$//' | bash
             pause
             ;;
         4)
             echo ""
             echo -e "${Y}🚀 Remover Bot Dc...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/bot_remover.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/bot_remover.sh | sed 's/\r$//' | bash
             pause
             ;;
         5)
@@ -93,13 +94,13 @@ while true; do
         7)
             echo ""
             echo -e "${Y}💻 Instalando VM (IDX VPS)...${N}"
-            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/vps.sh)
+            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
             pause
             ;;
         8)
             echo ""
             echo -e "${Y}🖥️  Instalando RDP...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/rdp_installer.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/rdp_installer.sh | sed 's/\r$//' | bash
             pause
             ;;
         9)
