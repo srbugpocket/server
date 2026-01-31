@@ -10,7 +10,7 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-Sponsor By These Guys!                                                                  
+Os criadores disso tudo são esses caras!                                                                  
 HOPINGBOYZ
 Jishnu
 NotGamerPie
@@ -42,31 +42,31 @@ validate_input() {
     case $type in
         "number")
             if ! [[ "$value" =~ ^[0-9]+$ ]]; then
-                print_status "ERROR" "Must be a number"
+                print_status "ERROR" "coloque o numero certo"
                 return 1
             fi
             ;;
         "size")
             if ! [[ "$value" =~ ^[0-9]+[GgMm]$ ]]; then
-                print_status "ERROR" "Must be a size with unit (e.g., 100G, 512M)"
+                print_status "ERRO" "quantos de espaço você deseja? (e.g., 100G, 512M)"
                 return 1
             fi
             ;;
         "port")
             if ! [[ "$value" =~ ^[0-9]+$ ]] || [ "$value" -lt 23 ] || [ "$value" -gt 65535 ]; then
-                print_status "ERROR" "Must be a valid port number (23-65535)"
+                print_status "ERRO" "Coloque a porta correta! (23-65535)"
                 return 1
             fi
             ;;
         "name")
             if ! [[ "$value" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-                print_status "ERROR" "VM name can only contain letters, numbers, hyphens, and underscores"
+               print_status "ERRO" "O nome da VM pode conter apenas letras, números, hífens e sublinhados"
                 return 1
             fi
             ;;
         "username")
             if ! [[ "$value" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
-                print_status "ERROR" "Username must start with a letter or underscore, and contain only letters, numbers, hyphens, and underscores"
+                print_status "ERROR" "O usuario só pode conter apenas letras, números, hífens e sublinhados"
                 return 1
             fi
             ;;
@@ -116,7 +116,7 @@ load_vm_config() {
         source "$config_file"
         return 0
     else
-        print_status "ERROR" "Configuration for VM '$vm_name' not found"
+        print_status "ERROR" "Configuração da VM '$vm_name' não encontrado"
         return 1
     fi
 }
@@ -144,15 +144,15 @@ SEED_FILE="$SEED_FILE"
 CREATED="$CREATED"
 EOF
     
-    print_status "SUCCESS" "Configuration saved to $config_file"
+    print_status "SUCCESSO" "Configuration saved to $config_file"
 }
 
 # Function to create new VM
 create_new_vm() {
-    print_status "INFO" "Creating a new VM"
+    print_status "INFO" "Creatiando a nova VM"
     
     # OS Selection
-    print_status "INFO" "Select an OS to set up:"
+    print_status "INFO" "Selecione o OS para ser usado:"
     local os_options=()
     local i=1
     for os in "${!OS_OPTIONS[@]}"; do
@@ -168,7 +168,7 @@ create_new_vm() {
             IFS='|' read -r OS_TYPE CODENAME IMG_URL DEFAULT_HOSTNAME DEFAULT_USERNAME DEFAULT_PASSWORD <<< "${OS_OPTIONS[$os]}"
             break
         else
-            print_status "ERROR" "Invalid selection. Try again."
+            print_status "ERRO" "seleção inavlida. Tente denovo."
         fi
     done
 
@@ -179,7 +179,7 @@ create_new_vm() {
         if validate_input "name" "$VM_NAME"; then
             # Check if VM name already exists
             if [[ -f "$VM_DIR/$VM_NAME.conf" ]]; then
-                print_status "ERROR" "VM with name '$VM_NAME' already exists"
+                print_status "ERRO" "esse nome nao pode ser usado pois '$VM_NAME' ja existe"
             else
                 break
             fi
@@ -187,7 +187,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Enter hostname (default: $VM_NAME): ")" HOSTNAME
+        read -p "$(print_status "INPUT" "Digite o nome do host (default: $VM_NAME): ")" HOSTNAME
         HOSTNAME="${HOSTNAME:-$VM_NAME}"
         if validate_input "name" "$HOSTNAME"; then
             break
@@ -195,7 +195,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Enter username (default: $DEFAULT_USERNAME): ")" USERNAME
+        read -p "$(print_status "INPUT" "Digite o nome de usuario (default: $DEFAULT_USERNAME): ")" USERNAME
         USERNAME="${USERNAME:-$DEFAULT_USERNAME}"
         if validate_input "username" "$USERNAME"; then
             break
@@ -203,18 +203,18 @@ create_new_vm() {
     done
 
     while true; do
-        read -s -p "$(print_status "INPUT" "Enter password (default: $DEFAULT_PASSWORD): ")" PASSWORD
+        read -s -p "$(print_status "INPUT" "Qual senha? (default: $DEFAULT_PASSWORD): ")" PASSWORD
         PASSWORD="${PASSWORD:-$DEFAULT_PASSWORD}"
         echo
         if [ -n "$PASSWORD" ]; then
             break
         else
-            print_status "ERROR" "Password cannot be empty"
+            print_status "ERRO" "A senha não pode estar vazia"
         fi
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Disk size (default: 20G): ")" DISK_SIZE
+        read -p "$(print_status "Coloque" quanto de espaço deseja em sua maquina? " (default: 20G): ")" DISK_SIZE
         DISK_SIZE="${DISK_SIZE:-20G}"
         if validate_input "size" "$DISK_SIZE"; then
             break
@@ -222,7 +222,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Memory in MB (default: 2048): ")" MEMORY
+        read -p "$(print_status "Coloque" quanto de memoria ram? " (default: 2048): ")" MEMORY
         MEMORY="${MEMORY:-2048}"
         if validate_input "number" "$MEMORY"; then
             break
@@ -230,7 +230,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Number of CPUs (default: 2): ")" CPUS
+        read -p "$(print_status "Coloque" "o numero de processadores (default: 2): ")" CPUS
         CPUS="${CPUS:-2}"
         if validate_input "number" "$CPUS"; then
             break
@@ -238,12 +238,12 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "SSH Port (default: 2222): ")" SSH_PORT
+        read -p "$(print_status "Coloque" "SSH Port (default: 2222): ")" SSH_PORT
         SSH_PORT="${SSH_PORT:-2222}"
         if validate_input "port" "$SSH_PORT"; then
-            # Check if port is already in use
+            # Checkando porta se esta em uso
             if ss -tln 2>/dev/null | grep -q ":$SSH_PORT "; then
-                print_status "ERROR" "Port $SSH_PORT is already in use"
+                print_status "ERRO" "Port $SSH_PORT ja esta em uso!"
             else
                 break
             fi
@@ -251,7 +251,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Enable GUI mode? (y/n, default: n): ")" gui_input
+        read -p "$(print_status "Coloque" "ativar modo GUI? (y/n, default: n): ")" gui_input
         GUI_MODE=false
         gui_input="${gui_input:-n}"
         if [[ "$gui_input" =~ ^[Yy]$ ]]; then 
@@ -260,47 +260,47 @@ create_new_vm() {
         elif [[ "$gui_input" =~ ^[Nn]$ ]]; then
             break
         else
-            print_status "ERROR" "Please answer y or n"
+            print_status "ERRO" "Por favor y ou n"
         fi
     done
 
     # Additional network options
-    read -p "$(print_status "INPUT" "Additional port forwards (e.g., 8080:80, press Enter for none): ")" PORT_FORWARDS
+    read -p "$(print_status "INPUT" "Additional port forwards (e.g., 8080:80, precione Enter para nenhuma): ")" PORT_FORWARDS
 
     IMG_FILE="$VM_DIR/$VM_NAME.img"
     SEED_FILE="$VM_DIR/$VM_NAME-seed.iso"
     CREATED="$(date)"
 
-    # Download and setup VM image
+    # Instalando Imagem da Vm😎
     setup_vm_image
     
-    # Save configuration
+    # Salvando configuraçao da Vm
     save_vm_config
 }
 
-# Function to setup VM image
+# Função para preparar a imagem da VM
 setup_vm_image() {
-    print_status "INFO" "Downloading and preparing image..."
+    print_status "INFO" "Instalando Imagem da Vm..."
     
-    # Create VM directory if it doesn't exist
+    # Criar o diretório da VM se não existir
     mkdir -p "$VM_DIR"
     
-    # Check if image already exists
+    # Checkando se a imagem existi
     if [[ -f "$IMG_FILE" ]]; then
         print_status "INFO" "Image file already exists. Skipping download."
     else
         print_status "INFO" "Downloading image from $IMG_URL..."
         if ! wget --progress=bar:force "$IMG_URL" -O "$IMG_FILE.tmp"; then
-            print_status "ERROR" "Failed to download image from $IMG_URL"
+            print_status "ERRO" "Falhou em conseguir o download da imagem! $IMG_URL"
             exit 1
         fi
         mv "$IMG_FILE.tmp" "$IMG_FILE"
     fi
     
-    # Resize the disk image if needed
+    # Tamanho de disco e necessario!
     if ! qemu-img resize "$IMG_FILE" "$DISK_SIZE" 2>/dev/null; then
-        print_status "WARN" "Failed to resize disk image. Creating new image with specified size..."
-        # Create a new image with the specified size
+        print_status "Cuidado" "Sistema falhou para conseguir o tamanho do disco. Criando imagem com o disco especificado..."
+        # Criar imagem com o disco especificado
         rm -f "$IMG_FILE"
         qemu-img create -f qcow2 -F qcow2 -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
         qemu-img create -f qcow2 "$IMG_FILE" "$DISK_SIZE"
@@ -333,14 +333,14 @@ local-hostname: $HOSTNAME
 EOF
 
     if ! cloud-localds "$SEED_FILE" user-data meta-data; then
-        print_status "ERROR" "Failed to create cloud-init seed image"
+        print_status "ERROR" "Falhou em usar o cloud-init imagem seed"
         exit 1
     fi
     
-    print_status "SUCCESS" "VM '$VM_NAME' created successfully."
+    print_status "SUCCESS" "VM '$VM_NAME' criado com sucesso successfully."
 }
 
-# Function to start a VM
+# Função para inicializar VM
 start_vm() {
     local vm_name=$1
     
@@ -349,15 +349,15 @@ start_vm() {
         print_status "INFO" "SSH: ssh -p $SSH_PORT $USERNAME@localhost"
         print_status "INFO" "Password: $PASSWORD"
         
-        # Check if image file exists
+        # Checkando se o arquivo da imagem existi
         if [[ ! -f "$IMG_FILE" ]]; then
-            print_status "ERROR" "VM image file not found: $IMG_FILE"
+            print_status "ERRO" "arquivo da imagem da vm nao encontrado!: $IMG_FILE"
             return 1
         fi
         
         # Check if seed file exists
         if [[ ! -f "$SEED_FILE" ]]; then
-            print_status "WARN" "Seed file not found, recreating..."
+            print_status "Cuidado" "arquivo seed nao encontrado, recriando..."
             setup_vm_image
         fi
         
@@ -375,7 +375,7 @@ start_vm() {
             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
         )
 
-        # Add port forwards if specified
+        # Adicionar ports forwards specificados
         if [[ -n "$PORT_FORWARDS" ]]; then
             IFS=',' read -ra forwards <<< "$PORT_FORWARDS"
             for forward in "${forwards[@]}"; do
@@ -385,14 +385,14 @@ start_vm() {
             done
         fi
 
-        # Add GUI or console mode
+        # Adicionar GUI ou modo console
         if [[ "$GUI_MODE" == true ]]; then
             qemu_cmd+=(-vga virtio -display gtk,gl=on)
         else
             qemu_cmd+=(-nographic -serial mon:stdio)
         fi
 
-        # Add performance enhancements
+        # Adicionar agentes de performace
         qemu_cmd+=(
             -device virtio-balloon-pci
             -object rng-random,filename=/dev/urandom,id=rng0
