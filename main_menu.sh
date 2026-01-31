@@ -55,7 +55,7 @@ while true; do
         1)
             echo ""
             echo -e "${Y}🔄 Running Dependency Installer...${N}"
-            curl -fsSL https://raw.githubusercontent.com/Sagargamin/INSTALLER-REPO/refs/heads/main/dependency.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/blob/main/dependency.sh | sed 's/\r$//' | bash
             pause
             ;;
         2)
