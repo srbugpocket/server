@@ -750,13 +750,13 @@ main_menu() {
         echo "Main Menu:"
         echo "  1) Create a new VM"
         if [ $vm_count -gt 0 ]; then
-            echo "  2) Start a VM"
-            echo "  3) Stop a VM"
-            echo "  4) Show VM info"
-            echo "  5) Edit VM configuration"
-            echo "  6) Delete a VM"
-            echo "  7) Resize VM disk"
-            echo "  8) Show VM performance"
+echo "  2) Iniciar uma VM"
+echo "  3) Parar uma VM"
+echo "  4) Mostrar informações da VM"
+echo "  5) Editar configuração da VM"
+echo "  6) Excluir uma VM"
+echo "  7) Redimensionar disco da VM"
+echo "  8) Mostrar desempenho da VM"
         fi
         echo "  0) Exit"
         echo
