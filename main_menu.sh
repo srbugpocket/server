@@ -19,8 +19,8 @@ header() {
     echo -e "${B} | |  | | (_| | | | | | | |  | |  __/ | | | |_| |${N}"
     echo -e "${B} |_|  |_|\__,_|_|_| |_| |_|  |_|\___|_| |_|\__,_|${N}"
     echo -e "${B}=====================================================${N}"
-    echo -e "${Y}        Increava-se no canal srbugpocket!
-                           Creditos:sagar gaming x2${N}
+    echo -e "${Y}       Increava-se no canal srbugpocket!${N}
+    echo -e "${Y}           Creditos:sagar gaming x2${N}
     echo -e "${B}=====================================================${N}"
     echo ""
 }
