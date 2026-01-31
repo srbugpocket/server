@@ -116,7 +116,7 @@ load_vm_config() {
         source "$config_file"
         return 0
     else
-        print_status "ERROR" "Configuração da VM '$vm_name' não encontrado"
+        print_status "ERRO" "Configuração da VM '$vm_name' não encontrado"
         return 1
     fi
 }
@@ -333,7 +333,7 @@ local-hostname: $HOSTNAME
 EOF
 
     if ! cloud-localds "$SEED_FILE" user-data meta-data; then
-        print_status "ERROR" "Falhou em usar o cloud-init imagem seed"
+        print_status "ERRO" "Falhou em usar o cloud-init imagem seed"
         exit 1
     fi
     
@@ -402,7 +402,7 @@ start_vm() {
         print_status "INFO" "Starting QEMU..."
         "${qemu_cmd[@]}"
         
-        print_status "INFO" "VM $vm_name has been shut down"
+        print_status "INFO" "VM $vm_name foi interrompida"
     fi
 }
 
@@ -410,8 +410,8 @@ start_vm() {
 delete_vm() {
     local vm_name=$1
     
-    print_status "WARN" "This will permanently delete VM '$vm_name' and all its data!"
-    read -p "$(print_status "INPUT" "Are you sure? (y/N): ")" -n 1 -r
+    print_status "WARN" "TEM CERTEZA QUE QUER DELETAR A VM '$vm_name' TODOS OS DADOS SERÃO APAGADOS!"
+    read -p "$(print_status "INPUT" "TEM CERTEAZA? (y/N): ")" -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         if load_vm_config "$vm_name"; then
@@ -419,7 +419,7 @@ delete_vm() {
             print_status "SUCCESS" "VM '$vm_name' has been deleted"
         fi
     else
-        print_status "INFO" "Deletion cancelled"
+        print_status "INFO" "Exclusão de VM cancelada!"
     fi
 }
 
