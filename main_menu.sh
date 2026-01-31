@@ -19,7 +19,8 @@ header() {
     echo -e "${B} | |  | | (_| | | | | | | |  | |  __/ | | | |_| |${N}"
     echo -e "${B} |_|  |_|\__,_|_|_| |_| |_|  |_|\___|_| |_|\__,_|${N}"
     echo -e "${B}=====================================================${N}"
-    echo -e "${Y}       Increava-se no canal srbugpocket!${N}"
+    echo -e "${Y}       Increva-se no canal srbugpocket!${N}"
+    echo -e "${Y}           Creditos: sagar gaming x2${N}"
     echo -e "${B}=====================================================${N}"
     echo ""
 }
@@ -35,12 +36,12 @@ while true; do
     header
     echo -e "${C} 1) ${W}instalar dependências ${G}(Node + Mineflayer)${N}"
     echo -e "${C} 2) ${W}Criador de Bot dc ${G}(Create app.js)${N}"
-    echo -e "${C} 3) ${W}Reinicalização automatica ${G}(Systemd Service)${N}"
+    echo -e "${C} 3) ${W}Reinicialização automatica ${G}(Systemd Service)${N}"
     echo -e "${C} 4) ${W}Remover Bot ${G}(Manager)${N}"
     echo -e "${C} 5) ${W}Servidor do Discord Link${N}"
-    echo -e "${C} 6) ${W}Canal do youtube Link${N}"
+    echo -e "${C} 6) ${W}Canal do YouTube Link${N}"
     echo -e "${C} 7) ${W}instalar VM ${G}(IDX VPS)${N}"
-    echo -e "${C} 8) ${W}Instalador de rdp ${G}(Desktop Environment)${N}"
+    echo -e "${C} 8) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
     echo -e "${C} 9) ${W}Instalador Tailscale ${G}(VPN)${N}"
     echo -e "${R} 10) Sair${N}"
     echo ""
@@ -74,7 +75,7 @@ while true; do
             ;;
         5)
             echo ""
-            echo -e "${B}📢 faça parte do servidor do discord!:${N}"
+            echo -e "${B}📢 faça parte do servidor do Discord!:${N}"
             echo -e "${G}🔗 https://discord.gg/WdWnkUpVwA${N}"
             echo ""
             pause
@@ -116,4 +117,3 @@ while true; do
             ;;
     esac
 done
-EOF
