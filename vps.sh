@@ -10,10 +10,7 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-Sponsor By These Guys!                                                                  
-HOPINGBOYZ
-Jishnu
-NotGamerPie
+                     bem vindo ao criador de vms!
 ========================================================================
 EOF
     echo
