@@ -396,7 +396,6 @@ start_vm() {
             -device virtio-balloon-pci
             -object rng-random,filename=/dev/urandom,id=rng0
             -device virtio-rng-pci,rng=rng0
-            
         )
 
         print_status "INFO" "Starting QEMU..."
