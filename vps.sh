@@ -377,8 +377,9 @@ start_vm() {
             IFS=',' read -ra forwards <<< "$PORT_FORWARDS"
             for forward in "${forwards[@]}"; do
                 IFS=':' read -r host_port guest_port <<< "$forward"
-             qemu_cmd+=(-device "virtio-net-pci,netdev=n${#qemu_cmd[@]}")
-             qemu_cmd+=(-netdev "user,id=n${#qemu_cmd[@]},hostfwd=tcp::$host_port-:$guest_port")
+             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22$(printf ',hostfwd=tcp::%s-:%s' $host_port $guest_port)"
+             -device virtio-net-pci,netdev=n0
+
 
 
             done
@@ -668,7 +669,7 @@ resize_vm_disk() {
                 
                 # Resize the disk
                 print_status "INFO" "Resizing disk to $new_disk_size..."
-                qemu-img resize "$IMG_FILE" "$DISK_SIZE" || true
+                if ! qemu-img resize "$IMG_FILE" "$DISK_SIZE" 2>/dev/null; then
                     DISK_SIZE="$new_disk_size"
                     save_vm_config
                     print_status "SUCCESS" "Disk resized successfully to $new_disk_size"
