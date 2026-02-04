@@ -369,6 +369,7 @@ start_vm() {
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
+            -machine q35,accel=kvm,kernel-irqchip=split
             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
         )
         # Add port forwards if specified
@@ -396,7 +397,6 @@ start_vm() {
             -device virtio-balloon-pci
             -object rng-random,filename=/dev/urandom,id=rng0
             -device virtio-rng-pci,rng=rng0
-            -device virtio-balloon-pci
             
         )
 
