@@ -10,10 +10,8 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-Os criadores disso tudo são esses caras!
-HOPINGBOYZ
-Jishnu
-NotGamerPie
+                         VM INSTALLER!
+
 ========================================================================
 EOF
     echo
