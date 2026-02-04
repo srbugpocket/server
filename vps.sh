@@ -222,16 +222,16 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Memory in MB (default: 2048): ")" MEMORY
-        MEMORY="${MEMORY:-2048}"
+        read -p "$(print_status "INPUT" "Memory in MB (default: 4096): ")" MEMORY
+        MEMORY="${MEMORY:-4096}"
         if validate_input "number" "$MEMORY"; then
             break
         fi
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Number of CPUs (default: 2): ")" CPUS
-        CPUS="${CPUS:-2}"
+        read -p "$(print_status "INPUT" "Number of CPUs (default: 4): ")" CPUS
+        CPUS="${CPUS:-4}"
         if validate_input "number" "$CPUS"; then
             break
         fi
@@ -367,7 +367,7 @@ start_vm() {
             -enable-kvm
             -m "$MEMORY"
             -smp "$CPUS"
-            -cpu host
+            -cpu max
             -drive "file=$IMG_FILE,format=qcow2,if=virtio"
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
@@ -380,8 +380,9 @@ start_vm() {
             IFS=',' read -ra forwards <<< "$PORT_FORWARDS"
             for forward in "${forwards[@]}"; do
                 IFS=':' read -r host_port guest_port <<< "$forward"
-                qemu_cmd+=(-device "virtio-net-pci,netdev=n${#qemu_cmd[@]}")
-                qemu_cmd+=(-netdev "user,id=n${#qemu_cmd[@]},hostfwd=tcp::$host_port-:$guest_port")
+             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22$(printf ',hostfwd=tcp::%s-:%s' $host_port $guest_port)"
+             -device virtio-net-pci,netdev=n0
+
             done
         fi
 
@@ -669,7 +670,7 @@ resize_vm_disk() {
                 
                 # Resize the disk
                 print_status "INFO" "Resizing disk to $new_disk_size..."
-                if qemu-img resize "$IMG_FILE" "$new_disk_size"; then
+                qemu-img resize "$IMG_FILE" "$DISK_SIZE" || true
                     DISK_SIZE="$new_disk_size"
                     save_vm_config
                     print_status "SUCCESS" "Disk resized successfully to $new_disk_size"
@@ -858,7 +859,7 @@ mkdir -p "$VM_DIR"
 
 # Supported OS list
 declare -A OS_OPTIONS=(
-    ["Ubuntu 22 Life"]="ubuntu|jammy|https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img|ubuntu22|ubuntu|ubuntu"
+    ["Ubuntu 22 Life"]="ubuntu|jammy|https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img|ubuntu22|ubuntu|ubuntu"
     ["Ubuntu 22.04"]="ubuntu|jammy|https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img|ubuntu22|ubuntu|ubuntu"
     ["Ubuntu 24.04"]="ubuntu|noble|https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img|ubuntu24|ubuntu|ubuntu"
     ["Debian 11"]="debian|bullseye|https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-amd64.qcow2|debian11|debian|debian"
