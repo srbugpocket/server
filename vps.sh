@@ -1,56 +1,60 @@
-#!/bin/bash
-
-# Script interativo seguro
+#!/usr/bin/env bash
 set -eo pipefail
+
+# garante TTY mesmo via curl | bash
+if [ ! -t 0 ]; then
+    exec </dev/tty
+fi
 
 HOME="${HOME:-/root}"
 VM_DIR="${VM_DIR:-$HOME/vms}"
-ISO_DIR="$VM_DIR/isos"
-
-mkdir -p "$VM_DIR" "$ISO_DIR"
+mkdir -p "$VM_DIR"
 
 pause() {
-    read -r -p "Pressione ENTER para continuar..."
+    read -r -p "Pressione ENTER para continuar..." </dev/tty
 }
 
 header() {
-    clear
     echo "===================================="
-    echo "   GERENCIADOR DE VPS / VM (QEMU)"
+    echo " GERENCIADOR DE VPS / VM"
     echo "===================================="
     echo
 }
 
-list_vms() {
-    echo "VMs disponíveis:"
-    ls "$VM_DIR"/*.qcow2 2>/dev/null | xargs -n1 basename | sed 's/.qcow2//' || echo "Nenhuma VM encontrada"
-    echo
+menu() {
+    while true; do
+        header
+        echo "1) Criar VM"
+        echo "2) Iniciar VM"
+        echo "0) Sair"
+        echo
+
+        read -r -p "Escolha uma opção: " op </dev/tty
+
+        case "$op" in
+            1)
+                echo "Criar VM (placeholder)"
+                pause
+                ;;
+            2)
+                echo "Iniciar VM (placeholder)"
+                pause
+                ;;
+            0)
+                echo "Saindo..."
+                exit 0
+                ;;
+            *)
+                echo "Opção inválida"
+                pause
+                ;;
+        esac
+        clear
+    done
 }
 
-create_vm() {
-    header
-    read -r -p "Nome da VM: " name
-    read -r -p "Tamanho do disco (GB): " size
-    read -r -p "Memória (MB): " ram
-    read -r -p "CPUs: " cpu
-    read -r -p "Caminho da ISO: " iso
-
-    vm_disk="$VM_DIR/$name.qcow2"
-
-    if [[ -f "$vm_disk" ]]; then
-        echo "❌ VM já existe!"
-        pause
-        return
-    fi
-
-    qemu-img create -f qcow2 "$vm_disk" "${size}G"
-
-    echo "✅ VM criada com sucesso!"
-    echo "Use 'Iniciar VM' para instalar o sistema."
-    pause
-}
-
-start_vm() {
+menu
+tart_vm() {
     header
     list_vms
     read -r -p "Nome da VM para iniciar: " name
