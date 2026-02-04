@@ -362,7 +362,6 @@ start_vm() {
         local qemu_cmd=(
             qemu-system-x86_64
             -enable-kvm
-            -machine q35,accel=kvm,kernel-irqchip=split
             -m "$MEMORY"
             -smp "$CPUS"
             -cpu host
