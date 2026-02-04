@@ -360,17 +360,20 @@ start_vm() {
         
         # Base QEMU command
         local qemu_cmd=(
-            qemu-system-x86_64
-            -enable-kvm
-            -m "$MEMORY"
-            -smp "$CPUS"
-            -cpu host
-            -drive "file=$IMG_FILE,format=qcow2,if=virtio"
-            -drive "file=$SEED_FILE,format=raw,if=virtio"
-            -boot order=c
-            -device virtio-net-pci,netdev=n0
-            -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
-        )
+    qemu-system-x86_64
+    -enable-kvm
+    -machine q35,accel=kvm,kernel-irqchip=split  # Modern chipset + melhor IRQ handling (ganho em I/O e latência)
+    -m "$MEMORY"
+    -smp "$CPUS",cores="$CPUS"                   # Especifique cores explicitamente se quiser afinar topology
+    -cpu host                                 # Já tem, ótimo (passthrough completo)
+    # Discos: adicione cache=none ou writeback + aio=native pra boost enorme em I/O
+    -drive "file=$IMG_FILE,format=qcow2,if=virtio,cache=none,aio=native,discard=unmap,detect-zeroes=unmap"
+    -drive "file=$SEED_FILE,format=raw,if=virtio,cache=none,aio=native"
+    -boot order=c,menu=on                     # Menu=on ajuda debug
+    # Rede: multi-queue virtio-net se CPUS >=4 (escala performance de rede com vCPUs)
+    -device virtio-net-pci,netdev=n0,mq=on,vectors=$((CPUS*2+2))  # mq=on + vectors pra multi-queue
+    -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22,net=10.0.2.0/24"  # net= pra evitar conflitos raros
+)
 
         # Add port forwards if specified
         if [[ -n "$PORT_FORWARDS" ]]; then
