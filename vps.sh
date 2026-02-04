@@ -391,13 +391,14 @@ start_vm() {
             qemu_cmd+=(-nographic -serial mon:stdio)
         fi
 
-        # Add performance enhancements
-        qemu_cmd+=(
-        
-    -device virtio-balloon-pci,id=balloon0,stats-period=10
-    -object rng-random,filename=/dev/urandom,id=rng0
-    -device virtio-rng-pci,rng=rng0,max-bytes=2048,period=500
-)
+# Add performance enhancements
+        qemu_cmd+=(
+            -device virtio-balloon-pci
+            -object rng-random,filename=/dev/urandom,id=rng0
+            -device virtio-rng-pci,rng=rng0
+            -device virtio-balloon-pci
+            
+        )
 
         print_status "INFO" "Starting QEMU..."
         "${qemu_cmd[@]}"
