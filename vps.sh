@@ -30,6 +30,9 @@ print_status() {
         "ERROR") echo -e "\033[1;31m[ERROR]\033[0m $message" ;;
         "SUCCESS") echo -e "\033[1;32m[SUCCESS]\033[0m $message" ;;
         "INPUT") echo -e "\033[1;36m[INPUT]\033[0m $message" ;;
+        "coloque") echo -e "\033[1;36m[INPUT]\033[0m $message" ;;
+        "ERRO") echo -e "\033[1;36m[INPUT]\033[0m $message" ;;
+        "SUCESSO") echo -e "\033[1;36m[INPUT]\033[0m $message" ;;
         *) echo "[$type] $message" ;;
     esac
 }
