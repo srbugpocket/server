@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # =============================
-# VM Manager
+# Enhanced Multi-VM Manager
 # =============================
 
 # Function to display header
@@ -10,7 +10,10 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-BEM VINDO AO CRIADOR DE VPS LINUX❤️
+Sponsor By These Guys!                                                                  
+HOPINGBOYZ
+Jishnu
+NotGamerPie
 ========================================================================
 EOF
     echo
@@ -39,19 +42,19 @@ validate_input() {
     case $type in
         "number")
             if ! [[ "$value" =~ ^[0-9]+$ ]]; then
-                print_status "ERROR" "Escolha certo"
+                print_status "ERROR" "Must be a number"
                 return 1
             fi
             ;;
         "size")
             if ! [[ "$value" =~ ^[0-9]+[GgMm]$ ]]; then
-                print_status "ERROR" "Escolha corretamente o tamanho do disco (e.g., 100G, 512M)"
+                print_status "ERROR" "Must be a size with unit (e.g., 100G, 512M)"
                 return 1
             fi
             ;;
         "port")
             if ! [[ "$value" =~ ^[0-9]+$ ]] || [ "$value" -lt 23 ] || [ "$value" -gt 65535 ]; then
-                print_status "ERROR" "Coloque uma porta valida! (23-65535)"
+                print_status "ERROR" "Must be a valid port number (23-65535)"
                 return 1
             fi
             ;;
@@ -113,7 +116,7 @@ load_vm_config() {
         source "$config_file"
         return 0
     else
-        print_status "ERROR" "Configuração da VM '$vm_name' not found"
+        print_status "ERROR" "Configuration for VM '$vm_name' not found"
         return 1
     fi
 }
@@ -146,7 +149,7 @@ EOF
 
 # Function to create new VM
 create_new_vm() {
-    print_status "INFO" "Criando a VM"
+    print_status "INFO" "Creating a new VM"
     
     # OS Selection
     print_status "INFO" "Select an OS to set up:"
@@ -855,12 +858,14 @@ mkdir -p "$VM_DIR"
 
 # Supported OS list
 declare -A OS_OPTIONS=(
-    ["Ubuntu 20.04"]="ubuntu|Focal|https://cloud-images.ubuntu.com/focal/20250508.1/focal-server-cloudimg-amd64.img|ubuntu20|ubuntu|ubuntu"
-    ["Ubuntu 22.04"]="ubuntu|jammy|https://cloud-images.ubuntu.com/jammy/20251206/jammy-server-cloudimg-amd64.img|ubuntu22|ubuntu|ubuntu"
-    ["Ubuntu 24.04"]="ubuntu|noble|https://cloud-images.ubuntu.com/noble/20251113/noble-server-cloudimg-amd64.img|ubuntu24|ubuntu|ubuntu"
-    ["Debian 11"]="debian|bullseye|https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-nocloud-amd64.raw|debian11|debian|debian"
-    ["Debian 12"]="debian|bookworm|https://cloud.debian.org/images/cloud/bookworm-backports/latest/debian-12-backports-nocloud-amd64.raw|debian12|debian|debian"
-    ['Arch Linux']="arch|cloud|https://archlinux-mirror.cloud.mu/images/latest/Arch-Linux-x86_64-cloudimg.qcow2|archlinux|arch|arch"
+    ["Ubuntu 22.04"]="ubuntu|jammy|https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img|ubuntu22|ubuntu|ubuntu"
+    ["Ubuntu 24.04"]="ubuntu|noble|https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img|ubuntu24|ubuntu|ubuntu"
+    ["Debian 11"]="debian|bullseye|https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-amd64.qcow2|debian11|debian|debian"
+    ["Debian 12"]="debian|bookworm|https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2|debian12|debian|debian"
+    ["Fedora 40"]="fedora|40|https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-Base-40-1.14.x86_64.qcow2|fedora40|fedora|fedora"
+    ["CentOS Stream 9"]="centos|stream9|https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2|centos9|centos|centos"
+    ["AlmaLinux 9"]="almalinux|9|https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2|almalinux9|alma|alma"
+    ["Rocky Linux 9"]="rockylinux|9|https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2|rocky9|rocky|rocky"
 )
 
 # Start the main menu
