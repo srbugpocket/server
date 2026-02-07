@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # =============================
-# Enhanced Multi-VM Manager
+#      VM Manager
 # =============================
 
 # Function to display header
@@ -10,10 +10,7 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-Sponsor By These Guys!                                                                  
-HOPINGBOYZ
-Jishnu
-NotGamerPie
+BEM-VINDO AO VM MANAGER❤️
 ========================================================================
 EOF
     echo
