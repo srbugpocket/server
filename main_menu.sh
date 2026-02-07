@@ -1,53 +1,49 @@
 #!/usr/bin/env bash
-# ==========================================
-# FERRAMENTA COMPLETA
-# ==========================================
-
 set -u
 
-# --- CORES ANSI ---
-C=$'\033[36m'  # Ciano
-G=$'\033[32m'  # Verde
-R=$'\033[31m'  # Vermelho
-B=$'\033[34m'  # Azul
-Y=$'\033[33m'  # Amarelo
-W=$'\033[97m'  # Branco
-N=$'\033[0m'   # Resetar
+# --- ANSI COLORS ---
+C=$'\033[36m'  # Cyan
+G=$'\033[32m'  # Green
+R=$'\033[31m'  # Red
+B=$'\033[34m'  # Blue
+Y=$'\033[33m'  # Yellow
+W=$'\033[97m'  # White
+N=$'\033[0m'   # Reset
 
-# --- FUNÇÃO DE CABEÇALHO ---
-cabecalho() {
+# --- MENU ---
+header() {
     clear
-    
     echo -e "${B}=====================================================${N}"
-    echo -e "${Y}        Inscreva-se no canal srbugpocket      ${N}"
+    echo -e "${Y}       Increva-se no canal srbugpocket!${N}"
+    echo -e "${Y}           Creditos: sagar gaming x2${N}"
     echo -e "${B}=====================================================${N}"
     echo ""
 }
 
-# --- FUNÇÃO DE PAUSA ---
-pausa() {
+# --- PAUSE FUNCTION ---
+pause() {
     echo ""
     read -p "${W}Pressione [Enter] para voltar ao menu...${N}" dummy
 }
 
-# --- LOOP PRINCIPAL ---
+# --- MAIN LOOP ---
 while true; do
-    cabecalho
-    echo -e "${C} 1) ${W}Instalador de Dependências ${G}(Node + Mineflayer)${N}"
-    echo -e "${C} 2) ${W}Criador de Bot ${G}(Criar app.js)${N}"
-    echo -e "${C} 3) ${W}Configurar Reinício Automático ${G}(Serviço Systemd)${N}"
-    echo -e "${C} 4) ${W}Remover Bot ${G}(Gerenciador)${N}"
-    echo -e "${C} 5) ${W}Link do Servidor Discord${N}"
-    echo -e "${C} 6) ${W}Link do Canal do YouTube${N}"
-    echo -e "${C} 7) ${W}Instalador de VM ${G}(IDX VPS)${N}"
-    echo -e "${C} 8) ${W}Instalador RDP ${G}(Ambiente de Desktop)${N}"
+    header
+    echo -e "${C} 1) ${W}instalar dependências ${G}(Node + Mineflayer)${N}"
+    echo -e "${C} 2) ${W}Criador de Bot dc ${G}(Create app.js)${N}"
+    echo -e "${C} 3) ${W}Reinicialização automatica ${G}(Systemd Service)${N}"
+    echo -e "${C} 4) ${W}Remover Bot ${G}(Manager)${N}"
+    echo -e "${C} 5) ${W}Servidor do Discord Link${N}"
+    echo -e "${C} 6) ${W}Canal do YouTube Link${N}"
+    echo -e "${C} 7) ${W}instalar VM ${G}(IDX VPS)${N}"
+    echo -e "${C} 8) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
     echo -e "${C} 9) ${W}Instalador Tailscale ${G}(VPN)${N}"
     echo -e "${R} 10) Sair${N}"
     echo ""
     echo -e "${B}=====================================================${N}"
-    read -p "${Y}👉 Selecione uma opção [1-10]: ${N}" escolha
+    read -p "${Y}👉 selecione a opção [1-10]: ${N}" choice
 
-    case $escolha in
+    case $choice in
         1)
             echo ""
             echo -e "${Y}🔄 instalando dependências...${N}"
@@ -68,20 +64,22 @@ while true; do
             ;;
         4)
             echo ""
-            echo -e "${Y}🚀 Servidor Do discord!${N}"
-            echo -e "${Y}🔗 https://discord.gg/WdWnkUpVwA${N}"
+            echo -e "${Y}🚀 Remover Bot Dc...${N}"
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/bot_remover.sh | sed 's/\r$//' | bash
             pause
             ;;
         5)
             echo ""
-            echo -e "${Y}💻 Instalando VM (IDX VPS)...${N}"
-            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
+            echo -e "${B}📢 faça parte do servidor do Discord!:${N}"
+            echo -e "${G}🔗 https://discord.gg/WdWnkUpVwA${N}"
+            echo ""
             pause
             ;;
         6)
             echo ""
-            echo -e "${Y}🚀 Link Do Canal do youtube!!${N}"
-            echo -e "${Y}https://www.youtube.com/@bugpocketgamer${N}"
+            echo -e "${R}📺 Increva-se no YouTube:${N}"
+            echo -e "${Y}🔗 https://www.youtube.com/@bugpocketgamer${N}"
+            echo ""
             pause
             ;;
         7)
