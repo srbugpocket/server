@@ -48,12 +48,7 @@ draw_header() {
 # FIX: Using 'EOF' (single quotes) prevents backslash breakage
 # -----------------------------------------------------------------
 cat << 'EOF'
-  _   _       _   ____                           ____  _      
- | \ | | ___ | |_/ ___| __ _ _ __ ___   ___ _ __|  _ \(_) ___ 
- |  \| |/ _ \| __| |  _ / _` | '_ ` _ \ / _ \ '__| |_) | |/ _ \
- | |\  | (_) | |_| |_| | (_| | | | | | |  __/ |  |  __/| |  __/
- |_| \_|\___/ \__|\____|\__,_|_| |_| |_|\___|_|  |_|   |_|\___|
-
+ 
 EOF
     echo -e "${BLUE}   :: LXC/LXD DEPLOYMENT SUITE ::${NC}"
     echo -e "${DIM}      Maintained by NotGamerPie${NC}"
