@@ -370,6 +370,7 @@ start_vm() {
             -drive "file=$IMG_FILE,format=qcow2,if=virtio,cache=writeback"
             -boot order=c
             -device virtio-net-pci,netdev=n0
+            -nographic
             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
         )
 
