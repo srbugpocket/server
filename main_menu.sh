@@ -19,7 +19,7 @@ header() {
     echo ""
 }
 
-# --- PAUSE FUNCTION ---
+# --- Função PAUSAR ---
 pause() {
     echo ""
     read -p "${W}Pressione [Enter] para voltar ao menu...${N}" dummy
@@ -28,7 +28,6 @@ pause() {
 # --- MAIN LOOP ---
 while true; do
     header
-    echo -e "${C} 1) ${W}instalar dependências ${G}(Node + Mineflayer)${N}"
     echo -e "${C} 2) ${W}Servidor do Discord Link${N}"
     echo -e "${C} 3) ${W}Canal do YouTube Link${N}"
     echo -e "${C} 4) ${W}instalar VM ${G}(IDX VPS)${N}"
@@ -41,38 +40,31 @@ while true; do
     case $choice in
         1)
             echo ""
-            echo -e "${Y}🔄 instalando dependências...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/dependency.sh | sed 's/\r$//' | bash
-            pause
-            ;;
-      
-        2)
-            echo ""
             echo -e "${B}📢 faça parte do servidor do Discord!:${N}"
             echo -e "${G}🔗 https://discord.gg/WdWnkUpVwA${N}"
             echo ""
             pause
             ;;
-        3)
+        2)
             echo ""
             echo -e "${R}📺 Increva-se no YouTube:${N}"
             echo -e "${Y}🔗 https://www.youtube.com/@bugpocketgamer${N}"
             echo ""
             pause
             ;;
-        4)
+        3)
             echo ""
             echo -e "${Y}💻 Instalando VM (IDX VPS)...${N}"
             bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
             pause
             ;;
-        5)
+        4)
             echo ""
             echo -e "${Y}🖥️  Instalando RDP...${N}"
             curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/rdp_installer.sh | sed 's/\r$//' | bash
             pause
             ;;
-        6)
+        5)
             echo ""
             echo -e "${G}👋 Saindo... ${N}"
             exit 0
