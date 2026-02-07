@@ -28,8 +28,8 @@ pause() {
 # --- MAIN LOOP ---
 while true; do
     header
-    echo -e "${C} 2) ${W}Servidor do Discord Link${N}"
-    echo -e "${C} 3) ${W}Canal do YouTube Link${N}"
+    echo -e "${C} 2) ${W}Servidor do Discord${N}"
+    echo -e "${C} 3) ${W}Canal do YouTube${N}"
     echo -e "${C} 4) ${W}instalar VM ${G}(IDX VPS)${N}"
     echo -e "${C} 5) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
     echo -e "${R} 6) Sair${N}"
