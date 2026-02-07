@@ -30,7 +30,7 @@ while true; do
     header
     echo -e "${C} 1) ${W}Servidor do Discord${N}"
     echo -e "${C} 2) ${W}Canal do YouTube${N}"
-    echo -e "${C} 3) ${W}instalar VM ${G}(IDX VPS)${N}"
+    echo -e "${C} 3) ${W}VM Manager ${G}(IDX VPS)${N}"
     echo -e "${C} 4) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
     echo -e "${R} 5) Sair${N}"
     echo ""
@@ -54,7 +54,7 @@ while true; do
             ;;
         3)
             echo ""
-            echo -e "${Y}💻 Instalando VM (IDX VPS)...${N}"
+            echo -e "${Y}💻 Acessando VM manager (IDX VPS)...${N}"
             bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
             pause
             ;;
