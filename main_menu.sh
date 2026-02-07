@@ -15,7 +15,6 @@ header() {
     clear
     echo -e "${B}=====================================================${N}"
     echo -e "${Y}       Increva-se no canal srbugpocket!${N}"
-    echo -e "${Y}           Creditos: sagar gaming x2${N}"
     echo -e "${B}=====================================================${N}"
     echo ""
 }
