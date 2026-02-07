@@ -364,7 +364,7 @@ start_vm() {
             -enable-kvm
             -m "$MEMORY"
             -smp "$CPUS"
-            -cpu host
+            -cpu max
             -drive "file=$IMG_FILE,format=raw,if=virtio"
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
