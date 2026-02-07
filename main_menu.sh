@@ -68,22 +68,20 @@ while true; do
             ;;
         4)
             echo ""
-            echo -e "${Y}🚀 Remover Bot Dc...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/bot_remover.sh | sed 's/\r$//' | bash
+            echo -e "${Y}🚀 Servidor Do discord!${N}"
+            echo -e "${Y}🔗 https://discord.gg/WdWnkUpVwA${N}"
             pause
             ;;
         5)
             echo ""
-            echo -e "${B}📢 faça parte do servidor do Discord!:${N}"
-            echo -e "${G}🔗 https://discord.gg/WdWnkUpVwA${N}"
-            echo ""
+            echo -e "${Y}💻 Instalando VM (IDX VPS)...${N}"
+            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
             pause
             ;;
         6)
             echo ""
-            echo -e "${R}📺 Increva-se no YouTube:${N}"
-            echo -e "${Y}🔗 https://www.youtube.com/@bugpocketgamer${N}"
-            echo ""
+            echo -e "${Y}🚀 Link Do Canal do youtube!!${N}"
+            echo -e "${Y}https://www.youtube.com/@bugpocketgamer${N}"
             pause
             ;;
         7)
