@@ -299,8 +299,8 @@ setup_vm_image() {
         print_status "WARN" "Failed to resize disk image. Creating new image with specified size..."
         # Create a new image with the specified size
         rm -f "$IMG_FILE"
-        qemu-img create -f qcow2 -F qcow2 -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
-        qemu-img create -f qcow2 "$IMG_FILE" "$DISK_SIZE"
+        qemu-img create -f raw -F raw -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
+        qemu-img create -f raw "$IMG_FILE" "$DISK_SIZE"
         if [ -f "$IMG_FILE.tmp" ]; then
             mv "$IMG_FILE.tmp" "$IMG_FILE"
         fi
@@ -365,7 +365,7 @@ start_vm() {
             -m "$MEMORY"
             -smp "$CPUS"
             -cpu host
-            -drive "file=$IMG_FILE,format=qcow2,if=virtio"
+            -drive "file=$IMG_FILE,format=raw,if=virtio"
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
