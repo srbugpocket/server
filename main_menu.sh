@@ -28,11 +28,11 @@ pause() {
 # --- MAIN LOOP ---
 while true; do
     header
-    echo -e "${C} 2) ${W}Servidor do Discord${N}"
-    echo -e "${C} 3) ${W}Canal do YouTube${N}"
-    echo -e "${C} 4) ${W}instalar VM ${G}(IDX VPS)${N}"
-    echo -e "${C} 5) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
-    echo -e "${R} 6) Sair${N}"
+    echo -e "${C} 1) ${W}Servidor do Discord${N}"
+    echo -e "${C} 2) ${W}Canal do YouTube${N}"
+    echo -e "${C} 3) ${W}instalar VM ${G}(IDX VPS)${N}"
+    echo -e "${C} 4) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
+    echo -e "${R} 5) Sair${N}"
     echo ""
     echo -e "${B}=====================================================${N}"
     read -p "${Y}👉 selecione a opção [1-10]: ${N}" choice
