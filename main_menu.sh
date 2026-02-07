@@ -30,15 +30,11 @@ pause() {
 while true; do
     header
     echo -e "${C} 1) ${W}instalar dependências ${G}(Node + Mineflayer)${N}"
-    echo -e "${C} 2) ${W}Criador de Bot dc ${G}(Create app.js)${N}"
-    echo -e "${C} 3) ${W}Reinicialização automatica ${G}(Systemd Service)${N}"
-    echo -e "${C} 4) ${W}Remover Bot ${G}(Manager)${N}"
-    echo -e "${C} 5) ${W}Servidor do Discord Link${N}"
-    echo -e "${C} 6) ${W}Canal do YouTube Link${N}"
-    echo -e "${C} 7) ${W}instalar VM ${G}(IDX VPS)${N}"
-    echo -e "${C} 8) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
-    echo -e "${C} 9) ${W}Instalador Tailscale ${G}(VPN)${N}"
-    echo -e "${R} 10) Sair${N}"
+    echo -e "${C} 2) ${W}Servidor do Discord Link${N}"
+    echo -e "${C} 3) ${W}Canal do YouTube Link${N}"
+    echo -e "${C} 4) ${W}instalar VM ${G}(IDX VPS)${N}"
+    echo -e "${C} 5) ${W}Instalador de RDP ${G}(Desktop Environment)${N}"
+    echo -e "${R} 6) Sair${N}"
     echo ""
     echo -e "${B}=====================================================${N}"
     read -p "${Y}👉 selecione a opção [1-10]: ${N}" choice
@@ -50,57 +46,34 @@ while true; do
             curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/dependency.sh | sed 's/\r$//' | bash
             pause
             ;;
+      
         2)
-            echo ""
-            echo -e "${Y}🛠️  iniciando criador de Bot Dc...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/bot_maker.sh | sed 's/\r$//' | bash
-            pause
-            ;;
-        3)
-            echo ""
-            echo -e "${Y}⚙️  iniciando reinicialização automatica...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/autorestarter.sh | sed 's/\r$//' | bash
-            pause
-            ;;
-        4)
-            echo ""
-            echo -e "${Y}🚀 Remover Bot Dc...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/bot_remover.sh | sed 's/\r$//' | bash
-            pause
-            ;;
-        5)
             echo ""
             echo -e "${B}📢 faça parte do servidor do Discord!:${N}"
             echo -e "${G}🔗 https://discord.gg/WdWnkUpVwA${N}"
             echo ""
             pause
             ;;
-        6)
+        3)
             echo ""
             echo -e "${R}📺 Increva-se no YouTube:${N}"
             echo -e "${Y}🔗 https://www.youtube.com/@bugpocketgamer${N}"
             echo ""
             pause
             ;;
-        7)
+        4)
             echo ""
             echo -e "${Y}💻 Instalando VM (IDX VPS)...${N}"
             bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
             pause
             ;;
-        8)
+        5)
             echo ""
             echo -e "${Y}🖥️  Instalando RDP...${N}"
             curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/rdp_installer.sh | sed 's/\r$//' | bash
             pause
             ;;
-        9)
-            echo ""
-            echo -e "${Y}🌐 Instalando Tailscale VPN...${N}"
-            curl -fsSL https://tailscale.com/install.sh | sh
-            pause
-            ;;
-        10)
+        6)
             echo ""
             echo -e "${G}👋 Saindo... ${N}"
             exit 0
