@@ -10,10 +10,7 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-Sponsor By These Guys!                                                                  
-HOPINGBOYZ
-Jishnu
-NotGamerPie
+BEM VINDO AO CRIADOR DE VPS LINUX❤️
 ========================================================================
 EOF
     echo
