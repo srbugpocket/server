@@ -2,12 +2,12 @@
 set -u
 
 # --- ANSI COLORS ---
-C=$'\033[36m'  # Cyan
-G=$'\033[32m'  # Green
-R=$'\033[31m'  # Red
-B=$'\033[34m'  # Blue
-Y=$'\033[33m'  # Yellow
-W=$'\033[97m'  # White
+C=$'\033[36m'  # Ciano
+G=$'\033[32m'  # Verde
+R=$'\033[31m'  # Vermelho
+B=$'\033[34m'  # Azul
+Y=$'\033[33m'  # Amarelo
+W=$'\033[97m'  # Branco
 N=$'\033[0m'   # Reset
 
 # --- MENU ---
