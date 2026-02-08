@@ -312,7 +312,8 @@ disable_root: false
 growpart:
   mode: auto
   devices: ['/']
-  ignore_growroot_disabled: false
+resize_rootfs: true
+
 
 resize_rootfs: true
 
