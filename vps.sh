@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # =============================
-#      VM Manager
+#          VM Manager
 # =============================
 
 # Function to display header
@@ -10,7 +10,7 @@ display_header() {
     clear
     cat << "EOF"
 ========================================================================
-BEM-VINDO AO VM MANAGER❤️
+      BEM-VINDO AO VM MANAGER❤️
 ========================================================================
 EOF
     echo
@@ -294,35 +294,29 @@ setup_vm_image() {
         mv "$IMG_FILE.tmp" "$IMG_FILE"
     fi
     
- # Resize the disk image if needed
-if [ ! -f "$IMG_FILE" ]; then
-    print_status "INFO" "Creating VM disk with size $DISK_SIZE..."
-    qemu-img create -f qcow2 -b "$BASE_IMAGE" "$IMG_FILE" "$DISK_SIZE"
-fi
-
-
+    # Resize the disk image if needed
+    if ! qemu-img resize "$IMG_FILE" "$DISK_SIZE" 2>/dev/null; then
+        print_status "WARN" "Failed to resize disk image. Creating new image with specified size..."
+        # Create a new image with the specified size
+        rm -f "$IMG_FILE"
+        qemu-img create -f qcow2 -F qcow2 -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
+        qemu-img create -f qcow2 "$IMG_FILE" "$DISK_SIZE"
+        if [ -f "$IMG_FILE.tmp" ]; then
+            mv "$IMG_FILE.tmp" "$IMG_FILE"
+        fi
+    fi
 
     # cloud-init configuration
-cat > user-data <<EOF
+    cat > user-data <<EOF
 #cloud-config
 hostname: $HOSTNAME
 ssh_pwauth: true
 disable_root: false
-
-growpart:
-  mode: auto
-  devices: ['/']
-resize_rootfs: true
-
-
-resize_rootfs: true
-
 users:
   - name: $USERNAME
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     password: $(openssl passwd -6 "$PASSWORD" | tr -d '\n')
-
 chpasswd:
   list: |
     root:$PASSWORD
@@ -364,7 +358,7 @@ start_vm() {
             setup_vm_image
         fi
         
-        # Base QEMU command
+       # Base QEMU command
         local qemu_cmd=(
             qemu-system-x86_64
             -enable-kvm
@@ -673,7 +667,7 @@ resize_vm_disk() {
                 
                 # Resize the disk
                 print_status "INFO" "Resizing disk to $new_disk_size..."
-                if qemu-img create "$IMG_FILE" "$new_disk_size"; then
+                if qemu-img resize "$IMG_FILE" "$new_disk_size"; then
                     DISK_SIZE="$new_disk_size"
                     save_vm_config
                     print_status "SUCCESS" "Disk resized successfully to $new_disk_size"
@@ -868,5 +862,6 @@ declare -A OS_OPTIONS=(
     ["Debian 12"]="debian|bookworm|https://cloud.debian.org/images/cloud/bookworm-backports/latest/debian-12-backports-nocloud-amd64.qcow2|debian12|debian|debian"
 
 )
+
 # Start the main menu
 main_menu
