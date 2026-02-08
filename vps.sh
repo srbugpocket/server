@@ -297,7 +297,7 @@ setup_vm_image() {
  # Resize the disk image if needed
 if [ ! -f "$IMG_FILE" ]; then
     print_status "INFO" "Creating VM disk with size $DISK_SIZE..."
-    qemu-img create -f raw -b "$BASE_IMAGE" "$IMG_FILE" "$DISK_SIZE"
+    qemu-img create -f qcow2 -b "$BASE_IMAGE" "$IMG_FILE" "$DISK_SIZE"
 fi
 
 
@@ -371,7 +371,7 @@ start_vm() {
             -m "$MEMORY"
             -smp "$CPUS"
             -cpu max
-            -drive "file=$IMG_FILE,format=raw,if=virtio,cache=writeback"
+            -drive file=$IMG_FILE,format=qcow2,if=virtio
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
