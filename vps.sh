@@ -159,7 +159,7 @@ create_new_vm() {
     done
     
     while true; do
-        read -p "$(print_status "INPUT" "Digite sua escolha"(1-${#OS_OPTIONS[@]}): ")" choice
+        read -p "$(print_status "INPUT" "Digite sua escolha (1-${#OS_OPTIONS[@]}): ")" choice
         if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le ${#OS_OPTIONS[@]} ]; then
             local os="${os_options[$choice]}"
             IFS='|' read -r OS_TYPE CODENAME IMG_URL DEFAULT_HOSTNAME DEFAULT_USERNAME DEFAULT_PASSWORD <<< "${OS_OPTIONS[$os]}"
