@@ -184,7 +184,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Enter hostname (default: $VM_NAME): ")" HOSTNAME
+        read -p "$(print_status "INPUT" "Digite seu hostname (default: $VM_NAME): ")" HOSTNAME
         HOSTNAME="${HOSTNAME:-$VM_NAME}"
         if validate_input "name" "$HOSTNAME"; then
             break
@@ -192,7 +192,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Enter username (default: $DEFAULT_USERNAME): ")" USERNAME
+        read -p "$(print_status "INPUT" "Digite seu username (default: $DEFAULT_USERNAME): ")" USERNAME
         USERNAME="${USERNAME:-$DEFAULT_USERNAME}"
         if validate_input "username" "$USERNAME"; then
             break
@@ -200,18 +200,18 @@ create_new_vm() {
     done
 
     while true; do
-        read -s -p "$(print_status "INPUT" "Enter password (default: $DEFAULT_PASSWORD): ")" PASSWORD
+        read -s -p "$(print_status "INPUT" "Digite a senha. (default: $DEFAULT_PASSWORD): ")" PASSWORD
         PASSWORD="${PASSWORD:-$DEFAULT_PASSWORD}"
         echo
         if [ -n "$PASSWORD" ]; then
             break
         else
-            print_status "ERROR" "Password cannot be empty"
+            print_status "ERROR" "A senha não pode estar vazia"
         fi
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Disk size (default: 20G): ")" DISK_SIZE
+        read -p "$(print_status "INPUT" "Tamanho do Disco (default: 20G): ")" DISK_SIZE
         DISK_SIZE="${DISK_SIZE:-20G}"
         if validate_input "size" "$DISK_SIZE"; then
             break
@@ -219,7 +219,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Memory in MB (default: 2048): ")" MEMORY
+        read -p "$(print_status "INPUT" "Memoria Ram MB (default: 2048): ")" MEMORY
         MEMORY="${MEMORY:-2048}"
         if validate_input "number" "$MEMORY"; then
             break
@@ -227,7 +227,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Number of CPUs (default: 2): ")" CPUS
+        read -p "$(print_status "INPUT" "Numeros de CPUs (default: 2): ")" CPUS
         CPUS="${CPUS:-2}"
         if validate_input "number" "$CPUS"; then
             break
@@ -248,7 +248,7 @@ create_new_vm() {
     done
 
     while true; do
-        read -p "$(print_status "INPUT" "Enable GUI mode? (y/n, default: n): ")" gui_input
+        read -p "$(print_status "INPUT" "Ativar GUI mode? (y/n, default: n): ")" gui_input
         GUI_MODE=false
         gui_input="${gui_input:-n}"
         if [[ "$gui_input" =~ ^[Yy]$ ]]; then 
