@@ -644,7 +644,7 @@ resize_vm_disk() {
             read -p "$(print_status "INPUT" "Enter new disk size (e.g., 50G): ")" new_disk_size
             if validate_input "size" "$new_disk_size"; then
                 if [[ "$new_disk_size" == "$DISK_SIZE" ]]; then
-                    print_status "INFO" "“O novo tamanho do disco é o mesmo que o tamanho atual. Nenhuma alteração foi feita."
+                    print_status "INFO" "O novo tamanho do disco é o mesmo que o tamanho atual. Nenhuma alteração foi feita."
                     return 0
                 fi
                 
