@@ -673,7 +673,7 @@ resize_vm_disk() {
                 
                 # Resize the disk
                 print_status "INFO" "Resizing disk to $new_disk_size..."
-                if qemu-img resize "$IMG_FILE" "$new_disk_size"; then
+                if qemu-img create "$IMG_FILE" "$new_disk_size"; then
                     DISK_SIZE="$new_disk_size"
                     save_vm_config
                     print_status "SUCCESS" "Disk resized successfully to $new_disk_size"
