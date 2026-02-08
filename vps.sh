@@ -257,7 +257,8 @@ create_new_vm() {
         elif [[ "$gui_input" =~ ^[Nn]$ ]]; then
             break
         else
-            print_status "ERROR" “Por favor, responda com y ou n”
+        print_status "ERROR" "Por favor, responda com y ou n"
+
 
         fi
     done
