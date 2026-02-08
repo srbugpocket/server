@@ -55,7 +55,7 @@ while true; do
         3)
             echo ""
             echo -e "${Y}💻 Acessando VM manager (IDX VPS)...${N}"
-            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/Vm%20Manager.sh)
+            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vm_manager.sh)
             pause
             ;;
         4)
