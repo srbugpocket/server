@@ -357,17 +357,6 @@ start_vm() {
             print_status "WARN" "Seed file not found, recreating..."
             setup_vm_image
         fi
-
-        qemu_cmd+=(
-    -no-reboot               # evita reboot automático em crash
-    -boot menu=on            # permite escolher dispositivo no boot
-)
-
-# Optional: append kernel parameters to bypass fsck hang
-KERNEL_PARAMS="fsck.mode=skip fsck.repair=no"
-if [[ -n "$KERNEL_PARAMS" ]]; then
-    qemu_cmd+=(-append "$KERNEL_PARAMS")
-fi
         
        # Base QEMU command
         local qemu_cmd=(
@@ -376,8 +365,8 @@ fi
             -m "$MEMORY"
             -smp "$CPUS"
             -cpu max
-            -drive file=$IMG_FILE,format=raw,if=virtio,cache=writeback
-            -drive "file=$SEED_FILE,format=raw,if=virtio",cache=writeback
+            -drive file=$IMG_FILE,format=raw,if=virtio
+            -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
             -nographic
@@ -403,9 +392,9 @@ fi
 
         # Add performance enhancements
         qemu_cmd+=(
+            -device virtio-balloon-pci
             -object rng-random,filename=/dev/urandom,id=rng0
             -device virtio-rng-pci,rng=rng0
-            -machine q35,accel=kvm
         )
 
         print_status "INFO" "Starting QEMU..."
@@ -553,7 +542,7 @@ edit_vm_config() {
                             # Check if port is already in use
                             if [ "$new_ssh_port" != "$SSH_PORT" ] && ss -tln 2>/dev/null | grep -q ":$new_ssh_port "; then
                                 print_status "ERROR" "Port $new_ssh_port is already in use"
-     fuck                       else
+                            else
                                 SSH_PORT="$new_ssh_port"
                                 break
                             fi
