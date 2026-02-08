@@ -55,13 +55,13 @@ while true; do
         3)
             echo ""
             echo -e "${Y}💻 Acessando VM manager (IDX VPS)...${N}"
-            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/vps.sh)
+            bash <(curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/Vm%20Manager.sh)
             pause
             ;;
         4)
             echo ""
             echo -e "${Y}🖥️  Instalando RDP...${N}"
-            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/rdp_installer.sh | sed 's/\r$//' | bash
+            curl -fsSL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/instalador_rdp.sh | sed 's/\r$//' | bash
             pause
             ;;
         5)
