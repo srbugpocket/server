@@ -364,6 +364,7 @@ start_vm() {
 )
 
 # Optional: append kernel parameters to bypass fsck hang
+KERNEL_PARAMS="fsck.mode=skip fsck.repair=no"
 if [[ -n "$KERNEL_PARAMS" ]]; then
     qemu_cmd+=(-append "$KERNEL_PARAMS")
 fi
