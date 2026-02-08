@@ -357,6 +357,16 @@ start_vm() {
             print_status "WARN" "Seed file not found, recreating..."
             setup_vm_image
         fi
+
+        qemu_cmd+=(
+    -no-reboot               # evita reboot automático em crash
+    -boot menu=on            # permite escolher dispositivo no boot
+)
+
+# Optional: append kernel parameters to bypass fsck hang
+if [[ -n "$KERNEL_PARAMS" ]]; then
+    qemu_cmd+=(-append "$KERNEL_PARAMS")
+fi
         
        # Base QEMU command
         local qemu_cmd=(
@@ -366,6 +376,7 @@ start_vm() {
             -smp "$CPUS"
             -cpu max
             -drive file=$IMG_FILE,format=raw,if=virtio
+            -drive file="$VM_IMAGE",if=virtio,format=raw,cache=writeback
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
