@@ -294,39 +294,35 @@ setup_vm_image() {
         mv "$IMG_FILE.tmp" "$IMG_FILE"
     fi
     
-    # Resize the disk image if needed
-if [ ! -f "$IMG_FILE" ]; then
-    print_status "INFO" "Creating VM disk with size $DISK_SIZE..."
-    qemu-img create -f raw -b "$BASE_IMAGE" "$IMG_FILE" "$DISK_SIZE"
-fi
+ # Resize the disk image if needed
+    if ! qemu-img resize "$IMG_FILE" "$DISK_SIZE" 2>/dev/null; then
+        print_status "WARN" "Failed to resize disk image. Creating new image with specified size..."
+        # Create a new image with the specified size
+        rm -f "$IMG_FILE"
+        qemu-img create -f raw -F raw -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
+        qemu-img create -f raw "$IMG_FILE" "$DISK_SIZE"
+        if [ -f "$IMG_FILE.tmp" ]; then
+            mv "$IMG_FILE.tmp" "$IMG_FILE"
+        fi
+    fi
 
-
+    # cloud-init configuration
     cat > user-data <<EOF
 #cloud-config
 hostname: $HOSTNAME
 ssh_pwauth: true
 disable_root: false
-
-growpart:
-  mode: auto
-  devices: ['/']
-  ignore_growroot_disabled: false
-
-resize_rootfs: true
-
 users:
   - name: $USERNAME
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     password: $(openssl passwd -6 "$PASSWORD" | tr -d '\n')
-
 chpasswd:
   list: |
     root:$PASSWORD
     $USERNAME:$PASSWORD
   expire: false
 EOF
-
 
     cat > meta-data <<EOF
 instance-id: iid-$VM_NAME
