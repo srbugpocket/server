@@ -553,7 +553,7 @@ edit_vm_config() {
                             # Check if port is already in use
                             if [ "$new_ssh_port" != "$SSH_PORT" ] && ss -tln 2>/dev/null | grep -q ":$new_ssh_port "; then
                                 print_status "ERROR" "Port $new_ssh_port is already in use"
-                            else
+     fuck                       else
                                 SSH_PORT="$new_ssh_port"
                                 break
                             fi
