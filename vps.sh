@@ -299,8 +299,8 @@ setup_vm_image() {
         print_status "WARN" "Failed to resize disk image. Creating new image with specified size..."
         # Create a new image with the specified size
         rm -f "$IMG_FILE"
-        qemu-img create -f qcow2 -F qcow2 -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
-        qemu-img create -f qcow2 "$IMG_FILE" "$DISK_SIZE"
+        qemu-img create -f raw -F raw -b "$IMG_FILE" "$IMG_FILE.tmp" "$DISK_SIZE" 2>/dev/null || \
+        qemu-img create -f raw "$IMG_FILE" "$DISK_SIZE"
         if [ -f "$IMG_FILE.tmp" ]; then
             mv "$IMG_FILE.tmp" "$IMG_FILE"
         fi
@@ -365,7 +365,7 @@ start_vm() {
             -m "$MEMORY"
             -smp "$CPUS"
             -cpu max
-            -drive file=$IMG_FILE,format=qcow2,if=virtio
+            -drive file=$IMG_FILE,format=raw2,if=virtio
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
@@ -858,8 +858,8 @@ mkdir -p "$VM_DIR"
 declare -A OS_OPTIONS=(
     ["Ubuntu 22.04"]="ubuntu|jammy|https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img|ubuntu22|ubuntu|ubuntu"
     ["Ubuntu 24.04"]="ubuntu|noble|https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img|ubuntu24|ubuntu|ubuntu"
-    ["Debian 11"]="debian|bullseye|https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-nocloud-amd64.qcow2|debian11|debian|debian"
-    ["Debian 12"]="debian|bookworm|https://cloud.debian.org/images/cloud/bookworm-backports/latest/debian-12-backports-nocloud-amd64.qcow2|debian12|debian|debian"
+    ["Debian 11"]="debian|bullseye|https://cloud.debian.org/images/cloud/bullseye-backports/latest/debian-11-backports-nocloud-amd64.raw|debian11|debian|debian"
+    ["Debian 12"]="debian|bookworm|https://cloud.debian.org/images/cloud/bookworm-backports/latest/debian-12-backports-nocloud-amd64.raw|debian12|debian|debian"
 
 )
 
