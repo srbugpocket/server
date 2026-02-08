@@ -264,9 +264,7 @@ create_new_vm() {
     done
 
     # Additional network options
-    read -p "$(print_status "INPUT" Tradução:
-
-    “Redirecionamentos de portas adicionais (ex.: 8080:80, pressione Enter para nenhum): ")" PORT_FORWARDS
+    read -p "$(print_status "INPUT" read -p "$(print_status "INPUT" "Redirecionamentos de portas adicionais (ex.: 8080:80, pressione Enter para nenhum): ")" PORT_FORWARDS
 
     IMG_FILE="$VM_DIR/$VM_NAME.img"
     SEED_FILE="$VM_DIR/$VM_NAME-seed.iso"
