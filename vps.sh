@@ -39,31 +39,31 @@ validate_input() {
     case $type in
         "number")
             if ! [[ "$value" =~ ^[0-9]+$ ]]; then
-                print_status "ERROR" "Must be a number"
+                print_status "ERROR" "Escolha o numero correto!"
                 return 1
             fi
             ;;
         "size")
             if ! [[ "$value" =~ ^[0-9]+[GgMm]$ ]]; then
-                print_status "ERROR" "Must be a size with unit (e.g., 100G, 512M)"
+                print_status "ERROR" "Coloque o tamanho do disco corretamente Ex: 100G, 512M)"
                 return 1
             fi
             ;;
         "port")
             if ! [[ "$value" =~ ^[0-9]+$ ]] || [ "$value" -lt 23 ] || [ "$value" -gt 65535 ]; then
-                print_status "ERROR" "Must be a valid port number (23-65535)"
+                print_status "ERROR" "Coloque o numero da porta correto (23-65535)"
                 return 1
             fi
             ;;
         "name")
             if ! [[ "$value" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-                print_status "ERROR" "VM name can only contain letters, numbers, hyphens, and underscores"
+                print_status "ERROR" "O nome da VM só pode conter letras, números, hífens e sublinhados"
                 return 1
             fi
             ;;
         "username")
             if ! [[ "$value" =~ ^[a-z_][a-z0-9_-]*$ ]]; then
-                print_status "ERROR" "Username must start with a letter or underscore, and contain only letters, numbers, hyphens, and underscores"
+                print_status "ERROR" "O nome do OS só pode conter letras, números, hífens e sublinhados"
                 return 1
             fi
             ;;
@@ -84,7 +84,7 @@ check_dependencies() {
     
     if [ ${#missing_deps[@]} -ne 0 ]; then
         print_status "ERROR" "Missing dependencies: ${missing_deps[*]}"
-        print_status "INFO" "On Ubuntu/Debian, try: sudo apt install qemu-system cloud-image-utils wget"
+        print_status "INFO" "Em Ubuntu/Debian, tente: sudo apt install qemu-system cloud-image-utils wget"
         exit 1
     fi
 }
@@ -113,7 +113,7 @@ load_vm_config() {
         source "$config_file"
         return 0
     else
-        print_status "ERROR" "Configuration for VM '$vm_name' not found"
+        print_status "ERROR" "Configuração da VM '$vm_name' não encontrada"
         return 1
     fi
 }
@@ -141,15 +141,15 @@ SEED_FILE="$SEED_FILE"
 CREATED="$CREATED"
 EOF
     
-    print_status "SUCCESS" "Configuration saved to $config_file"
+    print_status "SUCCESS" "Configuração salavada em $config_file"
 }
 
 # Function to create new VM
 create_new_vm() {
-    print_status "INFO" "Creating a new VM"
+    print_status "INFO" "Criando VM"
     
     # OS Selection
-    print_status "INFO" "Select an OS to set up:"
+    print_status "INFO" "Selecione o OS para ser utilizado:"
     local os_options=()
     local i=1
     for os in "${!OS_OPTIONS[@]}"; do
@@ -159,7 +159,7 @@ create_new_vm() {
     done
     
     while true; do
-        read -p "$(print_status "INPUT" "Enter your choice (1-${#OS_OPTIONS[@]}): ")" choice
+        read -p "$(print_status "INPUT" "Digite sua escolha"(1-${#OS_OPTIONS[@]}): ")" choice
         if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le ${#OS_OPTIONS[@]} ]; then
             local os="${os_options[$choice]}"
             IFS='|' read -r OS_TYPE CODENAME IMG_URL DEFAULT_HOSTNAME DEFAULT_USERNAME DEFAULT_PASSWORD <<< "${OS_OPTIONS[$os]}"
