@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-ETC="/etc
 
 # =============================
 #          VM Manager
@@ -865,7 +864,7 @@ trap cleanup EXIT
 check_dependencies
 
 # Initialize paths
-VM_DIR="${VM_DIR:-$ETC/hosts/vms}"
+VM_DIR="${VM_DIR:-$etc/hosts/vms}"
 mkdir -p "$VM_DIR"
 
 # Supported OS list
