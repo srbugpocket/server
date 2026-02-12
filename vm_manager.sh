@@ -424,7 +424,7 @@ delete_vm() {
 
 
 ISO_FILE="debian-live.iso"
-ISO_URL="https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-12-amd64-standard.iso"
+ISO_URL="https://mirrorservice.org/sites/cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.3.0-amd64-standard.iso"
 
 if [ ! -f "$ISO_FILE" ]; then
     echo "Baixando ISO..."
