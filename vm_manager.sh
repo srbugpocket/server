@@ -366,9 +366,8 @@ start_vm() {
             -smp "$CPUS"
             -cpu max
             -drive file=$IMG_FILE,format=raw,if=virtio
-            -cdrom "$ISO_FILE"
             -drive "file=$SEED_FILE,format=raw,if=virtio"
-            -boot d
+            -boot order=3
             -device virtio-net-pci,netdev=n0
             -nographic
             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
@@ -421,17 +420,6 @@ delete_vm() {
         print_status "INFO" "Deletion cancelled"
     fi
 }
-
-
-ISO_FILE="debian-live.iso"
-ISO_URL="https://mirrorservice.org/sites/cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.3.0-amd64-standard.iso"
-
-if [ ! -f "$ISO_FILE" ]; then
-    echo "Baixando ISO..."
-    curl -L "$ISO_URL" -o "$ISO_FILE"
-else
-    echo "ISO já existe."
-fi
 
 
 # Function to show VM info
