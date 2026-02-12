@@ -306,6 +306,37 @@ setup_vm_image() {
         fi
     fi
 
+    # cloud-init configuration
+    cat > user-data <<EOF
+#cloud-config
+hostname: $HOSTNAME
+ssh_pwauth: true
+disable_root: false
+users:
+  - name: $USERNAME
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    password: $(openssl passwd -6 "$PASSWORD" | tr -d '\n')
+chpasswd:
+  list: |
+    root:$PASSWORD
+    $USERNAME:$PASSWORD
+  expire: false
+EOF
+
+    cat > meta-data <<EOF
+instance-id: iid-$VM_NAME
+local-hostname: $HOSTNAME
+EOF
+
+    if ! cloud-localds "$SEED_FILE" user-data meta-data; then
+        print_status "ERROR" "Failed to create cloud-init seed image"
+        exit 1
+    fi
+    
+    print_status "SUCCESS" "VM '$VM_NAME' created successfully."
+}
+
 # Function to start a VM
 start_vm() {
     local vm_name=$1
@@ -336,7 +367,7 @@ start_vm() {
             -cpu max
             -drive file=$IMG_FILE,format=raw,if=virtio
             -drive "file=$SEED_FILE,format=raw,if=virtio"
-            -boot order=3
+            -boot order=c
             -device virtio-net-pci,netdev=n0
             -nographic
             -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
