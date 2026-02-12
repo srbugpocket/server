@@ -6,10 +6,13 @@
     openssh
     git
     qemu_kvm
-    sudo
     cdrkit
     cloud-utils
     qemu
+    qemu-utils
+    e2fsprogs
+    sudo
+
   ];
 
   env = {
