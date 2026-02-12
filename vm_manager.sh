@@ -366,7 +366,7 @@ start_vm() {
             -smp "$CPUS"
             -cpu max
             -drive file=$IMG_FILE,format=raw,if=virtio
-            -drive file=$ISO_FILE,media=cdrom \
+            -cdrom "$ISO_FILE"
             -drive "file=$SEED_FILE,format=raw,if=virtio"
             -boot d
             -device virtio-net-pci,netdev=n0
