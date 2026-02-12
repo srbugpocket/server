@@ -864,7 +864,7 @@ trap cleanup EXIT
 check_dependencies
 
 # Initialize paths
-VM_DIR="${VM_DIR:-$HOME/vms}"
+VM_DIR="${VM_DIR:-$ETC/hosts/vms}"
 mkdir -p "$VM_DIR"
 
 # Supported OS list
