@@ -864,7 +864,7 @@ trap cleanup EXIT
 check_dependencies
 
 # Initialize paths
-VM_DIR="/mnt/storage/vms"
+VM_DIR="/home/vps}"
 mkdir -p "$VM_DIR"
 
 # Supported OS list
