@@ -3,7 +3,6 @@
 
   packages = with pkgs; [
     unzip
-    openssh
     git
     qemu_kvm
     cdrkit
