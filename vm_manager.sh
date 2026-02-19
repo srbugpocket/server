@@ -367,6 +367,8 @@ start_vm() {
             -cpu max
             -drive file=$IMG_FILE,format=raw,if=virtio
             -drive "file=$SEED_FILE,format=raw,if=virtio"
+            -drive file=$IMG_FILE,format=qcow2,if=virtio
+            -drive "file=$SEED_FILE,format=qcow2,if=virtio"
             -boot order=c
             -device virtio-net-pci,netdev=n0
             -nographic
