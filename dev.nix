@@ -14,11 +14,16 @@
 
   ];
 
-  env = {
+    env = {
     EDITOR = "nano";
   };
 
   idx = {
+    extensions = [
+      "Dart-Code.flutter"
+      "Dart-Code.dart-code"
+    ];
+
     workspace = {
       onCreate = { };
       onStart = { };
