@@ -2,6 +2,7 @@
   channel = "stable-24.05";
 
   packages = with pkgs; [
+    python3
     unzip
     git
     qemu_kvm
