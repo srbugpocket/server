@@ -3,3 +3,5 @@ bash <(curl -sL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/
 
 
 apt install --no-install-recommends lxde-core xorg xrdp -y
+
+apt install firefox-esr
