@@ -2,9 +2,14 @@
 bash <(curl -sL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/menu.sh)
 
 
-apt install --no-install-recommends lxde-core xorg xrdp -y
+apt install xrdp xorgxrdp dbus-x11 lxde-core lxsession -y
 
-sudo systemctl enable xrdp
+adduser xrdp ssl-cert
+
+usermod -aG ssl-cert xrdp
+
 sudo systemctl start xrdp
+sudo systemctl enable xrdp
 
-apt install chormium -y
+sudo apt update
+sudo apt install chromium -y
