@@ -1,4 +1,15 @@
 # criador de maquinas virtuais!
+
+rm -rf ~/.emu
+rm -rf ~/.gradle
+rm -rf ~/.pub-cache
+rm -rf ~/.npm
+rm -rf ~/.androidsdkroot
+rm -rf ~/.dartServer
+rm -rf ~/.config
+rm -rf ~/.cache
+rm -rf ~/.android
+
 bash <(curl -sL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/menu.sh)
 
 
