@@ -19,6 +19,7 @@ usermod -aG sudo usuario
 sudo apt install cloud-guest-utils -y
 
 sudo growpart /dev/vda 1
+
 sudo resize2fs /dev/vda1
 
 apt install xrdp xorgxrdp dbus-x11 lxde-core lxsession -y
