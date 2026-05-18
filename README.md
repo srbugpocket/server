@@ -12,7 +12,7 @@ rm -rf ~/.android
 
 bash <(curl -sL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/menu.sh)
 
-useradd usuario
+adduser usuario
 
 usermod -aG sudo usuario
 
