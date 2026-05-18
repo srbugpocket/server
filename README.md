@@ -33,3 +33,13 @@ sudo systemctl enable xrdp
 
 sudo apt update
 sudo apt install chromium -y
+
+[+] Info:- Cleaning up temp dir
+[+] Info:- Congrats! Crafty is now installed!
+[+] Info:- We created a user called 'crafty' for you to run crafty as. (DO NOT RUN CRAFTY WITH ROOT OR SUDO) Switch to crafty user with 'sudo su crafty -'
+[+] Info:- Your install is located here: /var/opt/minecraft/crafty
+[+] Info:- You can run crafty by running /var/opt/minecraft/crafty/run_crafty.sh
+[+] Info:- You can update crafty by running /var/opt/minecraft/crafty/update_crafty.sh
+[+] Info:- A service unit file has been saved in /etc/systemd/system/crafty.service
+[+] Info:- run this command to enable crafty as a service- 'sudo systemctl enable crafty.service' 
+[+] Info:- run this command to start the crafty service- 'sudo systemctl start crafty.service' 
