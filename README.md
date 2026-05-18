@@ -12,6 +12,9 @@ rm -rf ~/.android
 
 bash <(curl -sL https://raw.githubusercontent.com/srbugpocket/server/refs/heads/main/menu.sh)
 
+useradd usuario
+
+usermod -aG sudo usuario
 
 apt install xrdp xorgxrdp dbus-x11 lxde-core lxsession -y
 
