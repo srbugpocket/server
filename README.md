@@ -29,6 +29,7 @@ adduser xrdp ssl-cert
 usermod -aG ssl-cert xrdp
 
 sudo systemctl start xrdp
+
 sudo systemctl enable xrdp
 
 sudo apt update
