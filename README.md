@@ -16,6 +16,8 @@ adduser usuario
 
 usermod -aG sudo usuario
 
+sudo apt install openssh-server -y
+
 sudo apt install cloud-guest-utils -y
 
 sudo growpart /dev/vda 1
