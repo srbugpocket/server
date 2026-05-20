@@ -51,11 +51,9 @@ sudo systemctl stop crafty
 
 sudo chown -R crafty:crafty /var/opt/minecraft/crafty
 
-sudo find /var/opt/minecraft/crafty -type d -exec chmod 755 {} \;
-
-sudo find /var/opt/minecraft/crafty -type f -exec chmod 644 {} \;
-
 sudo chmod +x /var/opt/minecraft/crafty/run_crafty.sh
 
 sudo systemctl start crafty
 sudo systemctl status crafty
+
+sudo journalctl -u crafty.service -f
