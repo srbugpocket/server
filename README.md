@@ -24,7 +24,7 @@ sudo growpart /dev/vda 1
 
 sudo resize2fs /dev/vda1
 
-apt install xrdp xorgxrdp dbus-x11 lxde-core lxsession -y
+apt install xrdp xorgxrdp dbus-x11 lxde-core -y
 
 adduser xrdp ssl-cert
 
