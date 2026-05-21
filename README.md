@@ -37,23 +37,21 @@ sudo systemctl enable xrdp
 sudo apt update
 sudo apt install chromium -y
 
-[+] Info:- Cleaning up temp dir
-[+] Info:- Congrats! Crafty is now installed!
-[+] Info:- We created a user called 'crafty' for you to run crafty as. (DO NOT RUN CRAFTY WITH ROOT OR SUDO) Switch to crafty user with 'sudo su crafty -'
-[+] Info:- Your install is located here: /var/opt/minecraft/crafty
-[+] Info:- You can run crafty by running /var/opt/minecraft/crafty/run_crafty.sh
-[+] Info:- You can update crafty by running /var/opt/minecraft/crafty/update_crafty.sh
-[+] Info:- A service unit file has been saved in /etc/systemd/system/crafty.service
-[+] Info:- run this command to enable crafty as a service- 'sudo systemctl enable crafty.service' 
-[+] Info:- run this command to start the crafty service- 'sudo systemctl start crafty.service' 
+sudo apt-get install curl gnupg apt-transport-https
 
-sudo systemctl stop crafty
+curl -fsSL https://packagecloud.io/pufferpanel/pufferpanel/gpgkey | gpg --dearmor | sudo tee /etc/apt/keyrings/pufferpanel.gpg > /dev/null
 
-sudo chown -R crafty:crafty /var/opt/minecraft/crafty
+echo "X-Repolib-Name: PufferPanel
+Types: deb
+URIs: https://packagecloud.io/pufferpanel/pufferpanel/any/
+Suites: any
+Components: main
+Signed-By: /etc/apt/keyrings/pufferpanel.gpg" | sudo tee /etc/apt/sources.list.d/pufferpanel.sources > /dev/null
 
-sudo chmod +x /var/opt/minecraft/crafty/run_crafty.sh
+sudo apt update
 
-sudo systemctl start crafty
-sudo systemctl status crafty
+sudo apt-get install pufferpanel
 
-sudo journalctl -u crafty.service -f
+sudo pufferpanel user add
+
+sudo systemctl enable --now pufferpanel
