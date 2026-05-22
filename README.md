@@ -43,10 +43,15 @@ sudo apt-get install curl gnupg apt-transport-https
 curl -fsSL https://packagecloud.io/pufferpanel/pufferpanel/gpgkey | gpg --dearmor | sudo tee /etc/apt/keyrings/pufferpanel.gpg > /dev/null
 
 echo "X-Repolib-Name: PufferPanel
+
 Types: deb
+
 URIs: https://packagecloud.io/pufferpanel/pufferpanel/any/
+
 Suites: any
+
 Components: main
+
 Signed-By: /etc/apt/keyrings/pufferpanel.gpg" | sudo tee /etc/apt/sources.list.d/pufferpanel.sources > /dev/null
 
 sudo apt update
