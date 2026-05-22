@@ -24,7 +24,7 @@ sudo resize2fs /dev/vda1
 
 sudo apt install openssh-server -y
 
-apt install xrdp xorgxrdp dbus-x11 lxde-core -y
+apt install xrdp xorgxrdp dbus-x11 jwm -y
 
 adduser xrdp ssl-cert
 
