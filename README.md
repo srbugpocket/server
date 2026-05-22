@@ -26,12 +26,7 @@ sudo apt install openssh-server -y
 
 apt install xrdp xorgxrdp dbus-x11 -y
 
-sudo apt install --no-install-recommends \
-lxde-core \
-lxappearance \
-lxterminal \
-pcmanfm \
-lightdm
+sudo apt install --no-install-recommends lxde-core lxappearance lxterminal pcmanfm lightdm
 
 adduser xrdp ssl-cert
 
