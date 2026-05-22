@@ -16,13 +16,13 @@ adduser usuario
 
 usermod -aG sudo usuario
 
-sudo apt install openssh-server -y
-
 sudo apt install cloud-guest-utils -y
 
 sudo growpart /dev/vda 1
 
 sudo resize2fs /dev/vda1
+
+sudo apt install openssh-server -y
 
 apt install xrdp xorgxrdp dbus-x11 lxde-core -y
 
