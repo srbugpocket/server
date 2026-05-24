@@ -59,4 +59,7 @@ sudo pufferpanel user add
 
 sudo systemctl enable --now pufferpanel
 
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+sudo dpkg -i cloudflared-linux-amd64.deb   
+
 cloudflared tunnel --url https://localhost:8443   
