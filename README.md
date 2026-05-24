@@ -22,10 +22,6 @@ sudo growpart /dev/vda 1
 
 sudo resize2fs /dev/vda1
 
-wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
-
-sudo dpkg -i jdk-21_linux-x64_bin.deb
-
 sudo apt install openssh-server -y
 
 apt install xrdp xorgxrdp dbus-x11 -y
@@ -62,5 +58,3 @@ sudo apt-get install pufferpanel
 sudo pufferpanel user add
 
 sudo systemctl enable --now pufferpanel
-
-journalctl -u crafty.service -f
