@@ -38,7 +38,7 @@ sudo systemctl enable xrdp
 
 sudo apt update
 
-sudo apt install firefox-esr
+sudo apt install chromium
 
 sudo apt-get install curl gnupg apt-transport-https
 
