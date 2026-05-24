@@ -58,3 +58,5 @@ sudo apt-get install pufferpanel
 sudo pufferpanel user add
 
 sudo systemctl enable --now pufferpanel
+
+cloudflared tunnel --url https://localhost:8443   
