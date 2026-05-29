@@ -54,6 +54,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     docker.io \
     htop \
+    nano \
     btop \
     neovim \
     lsof \
