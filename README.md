@@ -40,21 +40,33 @@ sudo apt update
 
 sudo apt install chromium
 
-sudo apt-get install curl gnupg apt-transport-https
+FROM ubuntu:22.04
 
-curl -fsSL https://packagecloud.io/pufferpanel/pufferpanel/gpgkey | gpg --dearmor | sudo tee /etc/apt/keyrings/pufferpanel.gpg > /dev/null
+ENV DEBIAN_FRONTEND=noninteractive
+ENV HOSTNAME=root
 
-echo "X-Repolib-Name: PufferPanel
-Types: deb
-URIs: https://packagecloud.io/pufferpanel/pufferpanel/any/
-Suites: any
-Components: main
-Signed-By: /etc/apt/keyrings/pufferpanel.gpg" | sudo tee /etc/apt/sources.list.d/pufferpanel.sources > /dev/null
+# ---- Base packages (ONE shot, ONE layer) ----
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    wget \
+    git \
+    sudo \
+    docker.io \
+    htop \
+    btop \
+    neovim \
+    lsof \
+    qemu-system \
+    cloud-image-utils \
+ && rm -rf /var/lib/apt/lists/*
 
-sudo apt update
+# ---- Install code-server ----
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-sudo apt-get install pufferpanel
+# ---- Workspace ----
+WORKDIR /workspace
 
-sudo pufferpanel user add
+EXPOSE 7860
 
-sudo systemctl enable --now pufferpanel
+CMD ["code-server", "--bind-addr", "0.0.0.0:7860", "--auth", "none"]
