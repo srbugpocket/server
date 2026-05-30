@@ -851,7 +851,7 @@ trap cleanup EXIT
 check_dependencies
 
 # Initialize paths
-VM_DIR="${VM_DIR:-$HOME/vms}"
+VM_DIR="${VM_DIR:-$HOME/workspace}"
 mkdir -p "$VM_DIR"
 
 # Supported OS list
