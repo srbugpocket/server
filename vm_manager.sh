@@ -361,12 +361,15 @@ start_vm() {
        # Base QEMU command
         local qemu_cmd=(
             qemu-system-x86_64
+            -enable-kvm
             -m "$MEMORY"
             -smp "$CPUS"
             -cpu max
             -drive file=$IMG_FILE,format=raw,if=virtio
             -drive "file=$SEED_FILE,format=raw,if=virtio"
+            -device virtio-net-pci,netdev=n0
             -nographic
+            -netdev "user,id=n0,hostfwd=tcp::$SSH_PORT-:22"
         )
 
         # Add port forwards if specified
@@ -848,7 +851,7 @@ trap cleanup EXIT
 check_dependencies
 
 # Initialize paths
-VM_DIR="${VM_DIR:-$HOME/workspace}"
+VM_DIR="${VM_DIR:-$HOME/vms}"
 mkdir -p "$VM_DIR"
 
 # Supported OS list
